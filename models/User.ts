@@ -47,7 +47,7 @@ const UserSchema = new Schema<IUser>({
         type: [Schema.Types.ObjectId],
     },
     groupsId: {
-        type: [Schema.Types.ObjectId],
+        type: [Schema.Types.ObjectId]
     }
 })
 
