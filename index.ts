@@ -26,9 +26,13 @@ app.use(cors());
 // allow to send json
 app.use(express.json());
 
-app.get('/', (req: Request, res: Response) => {
-    res.send('hello user');
+app.use('/api/users', (req: Request, res: Response) => {
+    res.send('users endpoint')
 })
+app.use('/api/tables', (req: Request, res: Response) => {
+    res.send('tables endpoint')
+})
+
 
 app.listen(PORT, () => {
     connect();
