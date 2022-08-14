@@ -26,6 +26,9 @@ app.use(cors());
 // allow to send json
 app.use(express.json());
 
+app.use('/api/auth', (req: Request, res: Response) => {
+    res.send('auth endpoint')
+})
 app.use('/api/users', (req: Request, res: Response) => {
     res.send('users endpoint')
 })
