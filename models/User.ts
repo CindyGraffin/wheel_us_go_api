@@ -42,15 +42,12 @@ const UserSchema = new Schema<IUser>({
     },
     tablesPartId: {
         type: [Schema.Types.ObjectId],
-        required: true
     },
     friendsId: {
         type: [Schema.Types.ObjectId],
-        required: true
     },
     groupsId: {
         type: [Schema.Types.ObjectId],
-        required: true
     }
 })
 
