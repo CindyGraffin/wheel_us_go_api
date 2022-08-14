@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Types } from "mongoose";
 
 interface IUser {
     firstName: string;
@@ -10,9 +10,9 @@ interface IUser {
     userImg?: string;
     outingPart: number;
     outingCre: number;
-    tablesPartId: string[];
-    friendsId: string[];
-    groupsId: string[];
+    tablesPartId: Types.DocumentArray<Types.ObjectId>;
+    friendsId: Types.DocumentArray<Types.ObjectId>;
+    groupsId: Types.DocumentArray<Types.ObjectId>;
 }
 
 export {IUser};

@@ -41,15 +41,15 @@ const UserSchema = new Schema<IUser>({
         required: true
     },
     tablesPartId: {
-        type: [String],
+        type: [Schema.Types.ObjectId],
         required: true
     },
     friendsId: {
-        type: [String],
+        type: [Schema.Types.ObjectId],
         required: true
     },
     groupsId: {
-        type: [String],
+        type: [Schema.Types.ObjectId],
         required: true
     }
 })
