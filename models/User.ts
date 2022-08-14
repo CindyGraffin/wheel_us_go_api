@@ -3,7 +3,7 @@ import { IUser } from "../types/IUser";
 
 const {Schema} = mongoose;
 
-const UserSchema = new Schema({
+const UserSchema = new Schema<IUser>({
     firstName: {
         type: String,
         required: true
@@ -54,6 +54,6 @@ const UserSchema = new Schema({
     }
 })
 
-const User = mongoose.model('User', UserSchema)
+const User = mongoose.model<IUser>('User', UserSchema)
 
 export {User};
