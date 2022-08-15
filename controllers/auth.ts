@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { User } from "../models/User";
 import bcrypt from 'bcryptjs';
+import { createError } from "../utils/createError";
 
 export const register = async(req: Request, res: Response, next: NextFunction) => {
     try {
@@ -28,11 +29,11 @@ export const login = async(req: Request, res: Response, next: NextFunction) => {
             mail: req.body.mail
         })
         if (!user) {
-            console.log('user does not exist');
+            return next(createError(404, 'User not found'));
         }
         const goodPassword = await bcrypt.compareSync(req.body.password, (user?.password || ''))
         if (!goodPassword) {
-            res.send('wrong password')
+            return next(createError(400, 'Wrong password or username'));
         } else {
             res.status(200).json(user);
 
