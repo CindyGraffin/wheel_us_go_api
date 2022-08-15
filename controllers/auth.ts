@@ -1,8 +1,8 @@
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 import { User } from "../models/User";
 import bcrypt from 'bcryptjs';
 
-export const register = async(req: Request, res: Response) => {
+export const register = async(req: Request, res: Response, next: NextFunction) => {
     try {
         const salt = bcrypt.genSaltSync(10);
         const hashPassword = bcrypt.hashSync(req.body.password, salt)
@@ -18,11 +18,11 @@ export const register = async(req: Request, res: Response) => {
         await newUser.save();
         res.status(200).json(newUser);
     } catch (error) {
-        console.log(error);
+        next(error);
     }
 }
 
-export const login = async(req: Request, res: Response) => {
+export const login = async(req: Request, res: Response, next: NextFunction) => {
     try {
         const user = await User.findOne({
             mail: req.body.mail
@@ -38,6 +38,6 @@ export const login = async(req: Request, res: Response) => {
 
         }
     } catch (error) {
-        console.log(error);
+        next(error);
     }
 }
