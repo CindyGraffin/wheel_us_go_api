@@ -1,3 +1,4 @@
 import{ createError} from './createError';
+import { verifyToken } from './verifyToken';
 
-export {createError};
+export {createError, verifyToken};
