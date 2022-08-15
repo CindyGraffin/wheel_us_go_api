@@ -10,8 +10,8 @@ export const createUser = async (req: Request, res: Response) => {
             mail: req.body.mail,
             password: req.body.password,
             city: req.body.city,
-            outingPart:req.body.outingPart,
-            outingCre: req.body.outingCre
+            outingPart: 0,
+            outingCre: 0
         })
         await newUser.save()
         res.status(200).json(newUser)

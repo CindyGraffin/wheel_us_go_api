@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import { usersRouter } from './routes/users';
+import { authRouter } from './routes/auth';
 
 const app = express();
 
@@ -26,9 +27,8 @@ app.use(cors());
 // allow to send json
 app.use(express.json());
 
-app.use('/api/auth', (req: Request, res: Response) => {
-    res.send('auth endpoint')
-})
+app.use('/api/auth', authRouter)
+
 app.use('/api/users', usersRouter)
 
 app.use('/api/rooms', (req: Request, res: Response) => {
