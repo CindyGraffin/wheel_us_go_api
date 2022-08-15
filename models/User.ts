@@ -50,7 +50,8 @@ const UserSchema = new Schema<IUser>({
     groupsId: {
         type: [Schema.Types.ObjectId]
     }
-})
+}, {timestamps: true}
+)
 
 const User = mongoose.model<IUser>('User', UserSchema)
 
