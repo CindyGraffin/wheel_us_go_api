@@ -41,12 +41,15 @@ export const login = async(req: Request, res: Response, next: NextFunction) => {
             {id: user.id},
             randomKey
         )
+        // we ignore next line because typescript will say user._doc doesn't exist on type IUser
+        // @ts-ignore
+        const {password, ...othersInfos} = user._doc
         res
             .cookie('access_token', token, {
                 httpOnly: true
             })
             .status(200)
-            .json(user);
+            .json({...othersInfos});
     } catch (error) {
         next(error);
     }
