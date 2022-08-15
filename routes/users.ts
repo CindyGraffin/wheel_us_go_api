@@ -9,7 +9,7 @@ usersRouter.post('/', createUser)
 usersRouter.get('/', getAllUsers)
 
 // GET ONE USER
-// usersRouter.get('/:id', (req, res) => {
-// })
+usersRouter.get('/:id', (req, res) => {
+})
 
 export {usersRouter};
