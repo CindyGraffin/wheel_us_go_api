@@ -30,7 +30,7 @@ export const login = async(req: Request, res: Response) => {
         if (!user) {
             console.log('user does not exist');
         }
-        const goodPassword = await bcrypt.compareSync(req.body.password, user?.password)
+        const goodPassword = await bcrypt.compareSync(req.body.password, (user?.password || ''))
         if (!goodPassword) {
             res.send('wrong password')
         } else {

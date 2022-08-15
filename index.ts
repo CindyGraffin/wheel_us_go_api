@@ -1,9 +1,8 @@
-import express, {Request, Response} from 'express';
+import express, {Request, Response, NextFunction} from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import mongoose from 'mongoose';
-import { usersRouter } from './routes/users';
-import { authRouter } from './routes/auth';
+import { usersRouter, authRouter } from './routes/index';
 
 const app = express();
 
@@ -38,7 +37,17 @@ app.use('/api/groups', (req: Request, res: Response) => {
     res.send('groups endpoint')
 })
 
-
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+    const errorStatus = err.status || 500;
+    const errorMessage = err.message || 'Something went wrong';
+    return res.status(errorStatus).json({
+        success: false,
+        status: errorStatus,
+        message: errorMessage,
+        // stack give more details about the error
+        stack: err.stack
+    })
+})
 
 app.listen(PORT, () => {
     connect();
