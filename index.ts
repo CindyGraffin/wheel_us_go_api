@@ -34,7 +34,7 @@ app.use('/api/users', (req: Request, res: Response) => {
 app.use('/api/rooms', (req: Request, res: Response) => {
     res.send('rooms endpoint')
 })
-app.use('api/groups', (req: Request, res: Response) => {
+app.use('/api/groups', (req: Request, res: Response) => {
     res.send('groups endpoint')
 })
 
