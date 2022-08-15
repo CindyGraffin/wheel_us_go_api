@@ -39,6 +39,7 @@ app.use('api/groups', (req: Request, res: Response) => {
     res.send('rooms endpoint')
 })
 
+
 app.listen(PORT, () => {
     connect();
     console.log(`app is running on port ${PORT}`);
