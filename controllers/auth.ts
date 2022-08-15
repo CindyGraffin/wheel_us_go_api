@@ -21,3 +21,23 @@ export const register = async(req: Request, res: Response) => {
         console.log(error);
     }
 }
+
+export const login = async(req: Request, res: Response) => {
+    try {
+        const user = await User.findOne({
+            mail: req.body.mail
+        })
+        if (!user) {
+            console.log('user does not exist');
+        }
+        const goodPassword = await bcrypt.compareSync(req.body.password, user?.password)
+        if (!goodPassword) {
+            res.send('wrong password')
+        } else {
+            res.status(200).json(user);
+
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
