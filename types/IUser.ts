@@ -4,7 +4,7 @@ interface IUser {
     firstName: string;
     lastName: string;
     mail: string;
-    birthday: Date;
+    birthday?: Date;
     password: string;
     city: string;
     userImg?: string;
