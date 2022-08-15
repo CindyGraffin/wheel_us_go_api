@@ -3,7 +3,6 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import mongoose from 'mongoose';
 
-
 const app = express();
 
 // loads .env file contents into process.env
@@ -36,7 +35,7 @@ app.use('/api/rooms', (req: Request, res: Response) => {
     res.send('rooms endpoint')
 })
 app.use('api/groups', (req: Request, res: Response) => {
-    res.send('rooms endpoint')
+    res.send('groups endpoint')
 })
 
 
