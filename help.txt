@@ -1,0 +1,16 @@
+1) npm init -y : initialise l'application Node en créant les packages
+2) npm i express : installe express
+3) npm i -D typescript @types/express @types/node : installe typescript et les types pour express et node
+4) npx tsc --init : génére le fichier tsconfig.json
+5) npm i dotenv : installe dotenv pour gérer les variables d'environnement
+6) npm install -D concurrently nodemon : nodemon relance l'application Node automatiquement quand des changements sont détectés et concurrently permet de lancer plusieurs commandes à la fois
+-D représente une devDependencies
+7) npm i mongodb
+npm i mongoose : installe mongoose, un outil de modélisation d'objets pour travailler dans un environnement asynchrone
+npm i -D @types/mongodb @types/mongoose
+8) npm install bcryptjs : for encoding passwords
+9) npm install --save @types/bcrypts
+10) npm i jsonwebtoken : we are gonna hide our user information in this json web token and we are gonna send it as a cookie
+11) npm i --save-dev @types/jsonwebtoken
+12) openssl rand -base64 32 : generate a random key
+13) npm i cookie-parser

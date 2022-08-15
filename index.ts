@@ -2,7 +2,7 @@ import express, {Request, Response} from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import mongoose from 'mongoose';
-
+import { usersRouter } from './routes/users';
 
 const app = express();
 
@@ -26,9 +26,19 @@ app.use(cors());
 // allow to send json
 app.use(express.json());
 
-app.get('/', (req: Request, res: Response) => {
-    res.send('hello user');
+app.use('/api/auth', (req: Request, res: Response) => {
+    res.send('auth endpoint')
 })
+app.use('/api/users', usersRouter)
+
+app.use('/api/rooms', (req: Request, res: Response) => {
+    res.send('rooms endpoint')
+})
+app.use('/api/groups', (req: Request, res: Response) => {
+    res.send('groups endpoint')
+})
+
+
 
 app.listen(PORT, () => {
     connect();
