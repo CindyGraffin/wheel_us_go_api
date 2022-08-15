@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { User } from "../models/User";
 import bcrypt from 'bcryptjs';
 import { createError } from "../utils/createError";
+import jwt from 'jsonwebtoken';
 
 export const register = async(req: Request, res: Response, next: NextFunction) => {
     try {
@@ -34,10 +35,18 @@ export const login = async(req: Request, res: Response, next: NextFunction) => {
         const goodPassword = await bcrypt.compareSync(req.body.password, (user?.password || ''))
         if (!goodPassword) {
             return next(createError(400, 'Wrong password or username'));
-        } else {
-            res.status(200).json(user);
-
         }
+        const randomKey = `${process.env.JWT}`
+        const token = jwt.sign(
+            {id: user.id},
+            randomKey
+        )
+        res
+            .cookie('access_token', token, {
+                httpOnly: true
+            })
+            .status(200)
+            .json(user);
     } catch (error) {
         next(error);
     }

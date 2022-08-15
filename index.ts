@@ -3,6 +3,8 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import { usersRouter, authRouter } from './routes/index';
+import cookieParser from "cookie-parser";
+
 
 const app = express();
 
@@ -24,6 +26,7 @@ const connect = async() => {
 //middlewares
 app.use(cors());
 // allow to send json
+app.use(cookieParser())
 app.use(express.json());
 
 app.use('/api/auth', authRouter)
@@ -36,6 +39,7 @@ app.use('/api/rooms', (req: Request, res: Response) => {
 app.use('/api/groups', (req: Request, res: Response) => {
     res.send('groups endpoint')
 })
+
 
 // allow to send a customized object error when an error occurs
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
