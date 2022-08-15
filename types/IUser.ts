@@ -10,6 +10,7 @@ interface IUser {
     userImg?: string;
     outingPart: number;
     outingCre: number;
+    // Types.ObjectId à vérifier
     tablesPartId?: Types.DocumentArray<Types.ObjectId>;
     friendsId?: Types.DocumentArray<Types.ObjectId>;
     groupsId?: Types.DocumentArray<Types.ObjectId>;
