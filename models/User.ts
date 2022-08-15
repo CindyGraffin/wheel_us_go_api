@@ -41,6 +41,7 @@ const UserSchema = new Schema<IUser>({
         required: true
     },
     tablesPartId: {
+        // Types.ObjectID à vérifier 
         type: [Schema.Types.ObjectId],
     },
     friendsId: {
