@@ -1,8 +1,10 @@
-import express, {Request, Response} from 'express';
+import express, {Request, Response, NextFunction} from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import mongoose from 'mongoose';
-import { usersRouter } from './routes/users';
+import { usersRouter, authRouter } from './routes/index';
+import cookieParser from "cookie-parser";
+
 
 const app = express();
 
@@ -24,11 +26,11 @@ const connect = async() => {
 //middlewares
 app.use(cors());
 // allow to send json
+app.use(cookieParser())
 app.use(express.json());
 
-app.use('/api/auth', (req: Request, res: Response) => {
-    res.send('auth endpoint')
-})
+app.use('/api/auth', authRouter)
+
 app.use('/api/users', usersRouter)
 
 app.use('/api/rooms', (req: Request, res: Response) => {
@@ -39,6 +41,18 @@ app.use('/api/groups', (req: Request, res: Response) => {
 })
 
 
+// allow to send a customized object error when an error occurs
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+    const errorStatus = err.status || 500;
+    const errorMessage = err.message || 'Something went wrong';
+    return res.status(errorStatus).json({
+        success: false,
+        status: errorStatus,
+        message: errorMessage,
+        // stack give more details about the error
+        stack: err.stack
+    })
+})
 
 app.listen(PORT, () => {
     connect();

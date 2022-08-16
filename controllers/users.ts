@@ -1,8 +1,9 @@
 import { User } from "../models/User";
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 
 
-export const createUser = async (req: Request, res: Response) => {
+
+export const createUser = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const newUser = new User({
             firstName: req.body.firstName,
@@ -10,30 +11,31 @@ export const createUser = async (req: Request, res: Response) => {
             mail: req.body.mail,
             password: req.body.password,
             city: req.body.city,
-            outingPart:req.body.outingPart,
-            outingCre: req.body.outingCre
+            outingPart: 0,
+            outingCre: 0
         })
         await newUser.save()
         res.status(200).json(newUser)
     } catch (error) {
-        console.log(error); 
+        next(error); 
     }
 }
 
-export const getUserById = async (req: Request, res: Response) => {
+export const getUserById = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const user = await User.findById(req.params.id)
         res.status(200).json(user)
     } catch (error) {
-        console.log(error); 
+        next(error); 
     }
 }
 
-export const getAllUsers = async (req: Request, res: Response) => {
+export const getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const users = await User.find()
         res.status(200).json(users)
     } catch (error) {
-        console.log(error); 
+        next(error); 
     }
 }
+

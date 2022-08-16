@@ -5,7 +5,7 @@ interface IUser {
     lastName: string;
     mail: string;
     birthday?: Date;
-    password: string;
+    password: string | undefined;
     city: string;
     userImg?: string;
     outingPart: number;
