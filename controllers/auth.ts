@@ -3,6 +3,7 @@ import { User } from "../models/User";
 import bcrypt from 'bcryptjs';
 import { createError } from "../utils/createError";
 import jwt from 'jsonwebtoken';
+import { IUser } from "../types/IUser";
 
 export const register = async(req: Request, res: Response, next: NextFunction) => {
     try {
@@ -24,7 +25,7 @@ export const register = async(req: Request, res: Response, next: NextFunction) =
     }
 }
 
-export const login = async(req: Request, res: Response, next: NextFunction) => {
+export const login = async(req: Request, res: Response, next: NextFunction): Promise<IUser | Error | void>  => {
     try {
         const user = await User.findOne({
             mail: req.body.mail
@@ -39,7 +40,8 @@ export const login = async(req: Request, res: Response, next: NextFunction) => {
         const randomKey = `${process.env.JWT}`
         const token = jwt.sign(
             {id: user.id},
-            randomKey
+            randomKey,
+            {expiresIn: '1h'}
         )
         // we ignore next line because typescript will say user._doc doesn't exist on type IUser
         // @ts-ignore
