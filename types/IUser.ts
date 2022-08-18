@@ -3,7 +3,7 @@ import mongoose, { Types } from "mongoose";
 interface IUser {
     firstName: string;
     lastName: string;
-    mail: string;
+    email: string;
     birthday?: Date;
     password: string | undefined;
     city: string;
