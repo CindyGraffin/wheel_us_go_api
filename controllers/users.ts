@@ -1,14 +1,12 @@
 import { User } from "../models/User";
 import { NextFunction, Request, Response } from "express";
 
-
-
 export const createUser = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const newUser = new User({
             firstName: req.body.firstName,
             lastName: req.body.lastName,
-            mail: req.body.mail,
+            email: req.body.email,
             password: req.body.password,
             city: req.body.city,
             outingPart: 0,

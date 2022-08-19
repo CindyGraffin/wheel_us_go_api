@@ -12,7 +12,7 @@ const UserSchema = new Schema<IUser>({
         type: String,
         required: true
     },
-    mail: {
+    email: {
         type: String,
         required: true,
         unique: true
