@@ -5,7 +5,15 @@ const {Schema} = mongoose;
 
 const RoomSchema = new Schema<IRoom>({
     tableCreator: {
-        type: Schema.Types.ObjectId,
+        type: [String],
+        required: true
+    },
+    placeName: {
+        type: String,
+        required: true
+    },
+    address: {
+        type: String,
         required: true
     },
     date: {
@@ -17,7 +25,7 @@ const RoomSchema = new Schema<IRoom>({
         required: true
     },
     users: {
-        type: [Schema.Types.ObjectId],
+        type: [String],
         required: true
     },
     aperoWheel: {

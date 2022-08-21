@@ -12,7 +12,9 @@ interface Dresscode {
 }
 
 interface IRoom {
-    tableCreator: Types.ObjectId;
+    tableCreator: string[];
+    placeName: string;
+    address: string;
     date: Date;
     theme: string;
     users: Types.DocumentArray<Types.ObjectId>;
