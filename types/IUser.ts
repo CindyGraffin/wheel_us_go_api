@@ -3,8 +3,9 @@ import mongoose, { Types } from "mongoose";
 interface IUser {
     firstName: string;
     lastName: string;
-    mail: string;
-    birthday?: Date;
+    email: string;
+    birthday: Date;
+    role: string;
     password: string | undefined;
     city: string;
     userImg?: string;

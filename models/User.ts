@@ -12,14 +12,18 @@ const UserSchema = new Schema<IUser>({
         type: String,
         required: true
     },
-    mail: {
+    email: {
         type: String,
         required: true,
         unique: true
     },
     birthday: {
         type: Date,
-        // required: true
+        required: true
+    },
+    role: {
+        type: String,
+        required: true
     },
     password: {
         type: String,
@@ -30,7 +34,7 @@ const UserSchema = new Schema<IUser>({
         required: true
     },
     userImg: {
-        type: String,
+        type: String
     },
     outingPart: {
         type: Number,

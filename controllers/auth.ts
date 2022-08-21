@@ -12,7 +12,10 @@ export const register = async(req: Request, res: Response, next: NextFunction) =
         const newUser = new User({
             firstName: req.body.firstName,
             lastName: req.body.lastName,
-            mail: req.body.mail,
+            email: req.body.email,
+            role: 'user',
+            userImg: req.body.userImg,
+            birthday: '2012-04-23T18:25:43.511Z',
             password: hashPassword,
             city: req.body.city,
             outingPart: 0,
@@ -28,7 +31,7 @@ export const register = async(req: Request, res: Response, next: NextFunction) =
 export const login = async(req: Request, res: Response, next: NextFunction): Promise<IUser | Error | void>  => {
     try {
         const user = await User.findOne({
-            mail: req.body.mail
+            email: req.body.email
         })
         if (!user) {
             return next(createError(404, 'User not found'));
