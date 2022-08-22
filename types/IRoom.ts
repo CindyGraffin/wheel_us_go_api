@@ -1,9 +1,9 @@
-import mongoose, {Types } from "mongoose";
+import mongoose, {Schema, Types } from "mongoose";
 
 interface WheelAperoType {
     setUp: boolean;
     launched: boolean;
-    person?: Types.ObjectId;
+    person?: Schema.Types.ObjectId;
 }
 
 interface Dresscode {
@@ -12,10 +12,11 @@ interface Dresscode {
 }
 
 interface IRoom {
-    roomCreator: string;
+    creatorId: Schema.Types.ObjectId;
     placeName: string;
     address: string;
     date: Date;
+    partId: [Schema.Types.ObjectId]
     theme: string;
     aperoWheel: WheelAperoType;
     dresscode: Dresscode;
