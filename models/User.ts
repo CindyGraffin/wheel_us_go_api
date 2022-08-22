@@ -47,16 +47,21 @@ const UserSchema = new Schema<IUser>({
     roomsId: [
         {
             type: mongoose.Types.ObjectId,
-            ref: 'Room',
-            required: true
+            ref: 'Room'
         }
     ],
-    friendsId: {
-        type: [Schema.Types.ObjectId],
-    },
-    groupsId: {
-        type: [Schema.Types.ObjectId]
-    }
+    friendsId: [
+        {
+            type: mongoose.Types.ObjectId,
+            ref: 'User'
+        }
+    ],
+    groupsId: [
+        {
+            type: mongoose.Types.ObjectId,
+            ref: 'User'
+        }
+    ]
 }, {timestamps: true}
 )
 

@@ -5,8 +5,8 @@ import { IRoom } from "../types/IRoom";
 const {Schema} = mongoose;
 
 const RoomSchema = new Schema<IRoom>({
-    roomCreator: {
-        type: String,
+    creatorId: {
+        type: Schema.Types.ObjectId,
         required: true
     },
     placeName: {
@@ -25,6 +25,11 @@ const RoomSchema = new Schema<IRoom>({
         type: String,
         required: true
     },
+    partId: [{
+        type: mongoose.Types.ObjectId, 
+        ref: 'User',
+        required: true
+    }],
     aperoWheel: {
         setUp: {
             type: Boolean,

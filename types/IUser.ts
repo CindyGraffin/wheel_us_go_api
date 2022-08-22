@@ -1,4 +1,4 @@
-import mongoose, { Types } from "mongoose";
+import mongoose, { Schema, Types } from "mongoose";
 
 interface IUser {
     firstName: string;
@@ -12,9 +12,9 @@ interface IUser {
     outingPart: number;
     outingCre: number;
     // Types.ObjectId à vérifier
-    roomsId?: mongoose.Types.ObjectId[];
-    friendsId?: Types.DocumentArray<Types.ObjectId>;
-    groupsId?: Types.DocumentArray<Types.ObjectId>;
+    roomsId?: [Schema.Types.ObjectId];
+    friendsId?: [Schema.Types.ObjectId];
+    groupsId?: [Schema.Types.ObjectId];
 }
 
 export {IUser};
