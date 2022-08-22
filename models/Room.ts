@@ -25,13 +25,6 @@ const RoomSchema = new Schema<IRoom>({
         type: String,
         required: true
     },
-    usersId: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User',
-            required: true
-        }
-    ],
     aperoWheel: {
         setUp: {
             type: Boolean,

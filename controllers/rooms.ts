@@ -2,7 +2,6 @@ import { Request, Response, NextFunction } from "express";
 import { Room } from "../models/Room";
 import { User } from "../models/User";
 import { IUser } from "../types/IUser";
-import { createError } from "../utils";
 
 export const createRoom = async (
     req: Request,
@@ -24,32 +23,29 @@ export const createRoom = async (
             },
             dresscode: {
                 setUp: false,
-            }
+            },
         });
-        usersEmails.map(async (userEmail) => {
-            
-            try {
-                const savedRoom = await newRoom.save();
-                
-                    try {
-                        const user = await User.findOneAndUpdate(
-                            {
-                                email: userEmail,
-                            },
-                            {
-                                $push: { roomsId: savedRoom._id },
-                            }
-                        );
-                    } catch (error) {
-                        next(error);
-                    }
-            } catch (error) {
-                next(error);
-            }
-        });
+        try {
+            const savedRoom = await newRoom.save();
+            usersEmails.map(async (userEmail, room) => {
+                try {
+                    const user = await User.findOneAndUpdate(
+                        {
+                            email: userEmail,
+                        },
+                        {
+                            $push: { roomsId: savedRoom._id },
+                        }
+                    );
+                } catch (error) {
+                    next(error);
+                }
+            });
+        } catch (error) {
+            next(error);
+        }
         res.status(200).json(usersEmails);
     } catch (error) {
         next(error);
     }
 };
- 
