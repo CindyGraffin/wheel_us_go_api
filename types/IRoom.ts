@@ -17,7 +17,6 @@ interface IRoom {
     address: string;
     date: Date;
     theme: string;
-    usersId: mongoose.Types.ObjectId[];
     aperoWheel: WheelAperoType;
     dresscode: Dresscode;
 }

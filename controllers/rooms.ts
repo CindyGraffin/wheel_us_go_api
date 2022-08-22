@@ -2,7 +2,6 @@ import { Request, Response, NextFunction } from "express";
 import { Room } from "../models/Room";
 import { User } from "../models/User";
 import { IUser } from "../types/IUser";
-import { createError } from "../utils";
 
 export const createRoom = async (
     req: Request,
