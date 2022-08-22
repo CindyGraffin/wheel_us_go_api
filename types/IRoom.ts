@@ -16,7 +16,7 @@ interface IRoom {
     placeName: string;
     address: string;
     date: Date;
-    partId: [Schema.Types.ObjectId]
+    partId: [Schema.Types.ObjectId];
     theme: string;
     aperoWheel: WheelAperoType;
     dresscode: Dresscode;
