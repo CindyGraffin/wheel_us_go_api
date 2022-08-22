@@ -44,10 +44,13 @@ const UserSchema = new Schema<IUser>({
         type: Number,
         required: true
     },
-    tablesPartId: {
-        // Types.ObjectID à vérifier 
-        type: [Schema.Types.ObjectId],
-    },
+    roomsId: [
+        {
+            type: mongoose.Types.ObjectId,
+            ref: 'Room',
+            required: true
+        }
+    ],
     friendsId: {
         type: [Schema.Types.ObjectId],
     },

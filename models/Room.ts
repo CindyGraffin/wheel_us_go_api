@@ -1,11 +1,12 @@
 
-import mongoose from "mongoose";
+import { ObjectId } from "mongodb";
+import mongoose, { Types } from "mongoose";
 import { IRoom } from "../types/IRoom";
 const {Schema} = mongoose;
 
 const RoomSchema = new Schema<IRoom>({
-    tableCreator: {
-        type: [String],
+    roomCreator: {
+        type: String,
         required: true
     },
     placeName: {
@@ -24,10 +25,13 @@ const RoomSchema = new Schema<IRoom>({
         type: String,
         required: true
     },
-    users: {
-        type: [String],
-        required: true
-    },
+    usersId: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+            required: true
+        }
+    ],
     aperoWheel: {
         setUp: {
             type: Boolean,
