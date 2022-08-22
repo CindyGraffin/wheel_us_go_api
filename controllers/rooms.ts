@@ -13,7 +13,7 @@ export const createRoom = async (
         const usersEmails: string[] = req.body.usersEmails;
         const usersIds: IUser[] = [];
         const newRoom = new Room({
-            roomCreator: "630294d6cbd0d3768a5d03b7",
+            roomCreator: req.body.roomCreator,
             date: new Date(),
             placeName: req.body.placeName,
             address: req.body.address,
@@ -24,32 +24,29 @@ export const createRoom = async (
             },
             dresscode: {
                 setUp: false,
-            }
+            },
         });
-        usersEmails.map(async (userEmail) => {
-            
-            try {
-                const savedRoom = await newRoom.save();
-                
-                    try {
-                        const user = await User.findOneAndUpdate(
-                            {
-                                email: userEmail,
-                            },
-                            {
-                                $push: { roomsId: savedRoom._id },
-                            }
-                        );
-                    } catch (error) {
-                        next(error);
-                    }
-            } catch (error) {
-                next(error);
-            }
-        });
-        res.status(200).json(usersEmails);
+        try {
+            const savedRoom = await newRoom.save();
+            usersEmails.map(async (userEmail) => {
+                try {
+                    const user = await User.findOneAndUpdate(
+                        {
+                            email: userEmail,
+                        },
+                        {
+                            $push: { roomsId: savedRoom._id },
+                        }
+                    );
+                } catch (error) {
+                    next(error);
+                }
+            });
+        res.status(200).json(savedRoom);
+        } catch (error) {
+            next(error);
+        }
     } catch (error) {
         next(error);
     }
 };
- 
