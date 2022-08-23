@@ -25,10 +25,9 @@ const RoomSchema = new Schema<IRoom>({
         type: String,
         required: true
     },
-    partId: [{
-        type: mongoose.Types.ObjectId, 
-        ref: 'User',
-        required: true
+    partEmails: [{
+        type: String,
+        required: true 
     }],
     aperoWheel: {
         setUp: {

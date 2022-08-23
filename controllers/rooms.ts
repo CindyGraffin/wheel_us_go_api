@@ -16,16 +16,19 @@ export const createRoom = async (
 			placeName: req.body.placeName,
 			address: req.body.address,
 			theme: req.body.theme,
+			partEmails: req.body.usersEmails,
 			aperoWheel: {
-				setUp: false,
+				setUp: req.body.wheelSetUp,
 				launched: false,
+				person: undefined
 			},
 			dresscode: {
-				setUp: false,
-			},
+				setUp: req.body.dresscodeSetUp,
+				description: req.body.dresscodeDesc
+			}
 		});
 		try {
-			newRoom.save((err) => {
+			newRoom.save(() => {
 				const usersEmails: string[] = req.body.usersEmails;
 				usersEmails.map(async (userEmail) => {
 					try {
