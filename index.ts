@@ -4,6 +4,7 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import { usersRouter, authRouter } from './routes/index';
 import cookieParser from "cookie-parser";
+import { roomsRouter } from './routes/rooms';
 
 
 const app = express();
@@ -33,9 +34,7 @@ app.use('/api/auth', authRouter)
 
 app.use('/api/users', usersRouter)
 
-app.use('/api/rooms', (req: Request, res: Response) => {
-    res.send('rooms endpoint')
-})
+app.use('/api/rooms', roomsRouter)
 app.use('/api/groups', (req: Request, res: Response) => {
     res.send('groups endpoint')
 })
