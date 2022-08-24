@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from "express";
-import { User } from "../models/User";
+import { UserModel } from "../models/User";
 
 const addFriend = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const user = await User.findByIdAndUpdate()
+        const user = await UserModel.findByIdAndUpdate()
     } catch (error) {
         
     }

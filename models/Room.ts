@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
-import { IRoom } from "../types/IRoom";
+import { Room } from "../types/Room";
 const {Schema} = mongoose;
 
-const RoomSchema = new Schema<IRoom>({
+const RoomSchema = new Schema<Room>({
     creatorId: {
         type: Schema.Types.ObjectId,
         required: true
@@ -52,6 +52,6 @@ const RoomSchema = new Schema<IRoom>({
 }, {timestamps: true}
 )
 
-const Room = mongoose.model<IRoom>('Room', RoomSchema)
+const RoomModel = mongoose.model<Room>('Room', RoomSchema)
 
-export {Room};
+export {RoomModel};

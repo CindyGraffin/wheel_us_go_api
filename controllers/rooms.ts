@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 import { ObjectId } from "mongodb";
 import mongoose, { Schema } from "mongoose";
-import { Room } from "../models/Room";
-import { User } from "../models/User";
+import { RoomModel } from "../models/Room";
+import { UserModel } from "../models/User";
 
 export const createRoom = async (
     req: Request,
@@ -16,7 +16,7 @@ export const createRoom = async (
 		partIds.push(new mongoose.Types.ObjectId(id))
 	});
     try {
-        const newRoom = new Room({
+        const newRoom = new RoomModel({
             _id: new mongoose.Types.ObjectId(),
             creatorId: new mongoose.Types.ObjectId(req.body.creatorId),
             date: new Date(),
@@ -38,7 +38,7 @@ export const createRoom = async (
             newRoom.save(() => {
                 partIds.map(async (id) => {
                     try {
-                        const user = await User.findByIdAndUpdate(
+                        const user = await UserModel.findByIdAndUpdate(
                             id,
                             {
                                 $push: { roomsId: newRoom._id },
