@@ -11,6 +11,12 @@ export const createRoom = async (
     res: Response,
     next: NextFunction
 ) => {
+	
+	const requestIds: string[] = req.body.partIds
+	const reqpartIds: ObjectId[] = []
+	requestIds.forEach(id => {
+		reqpartIds.push(new mongoose.Types.ObjectId(id))
+	});
     try {
         const newRoom = new Room({
             _id: new mongoose.Types.ObjectId(),
@@ -20,6 +26,7 @@ export const createRoom = async (
             address: req.body.address,
             theme: req.body.theme,
             partEmails: req.body.usersEmails,
+			partIds: reqpartIds,
             aperoWheel: {
                 setUp: req.body.wheelSetUp,
                 launched: false,
@@ -48,7 +55,9 @@ export const createRoom = async (
                         next(error);
                     }
                 });
-                next();
+                res.status(200).json(newRoom);
+
+                // next();
             });
         } catch (error) {
             next(error);
@@ -58,32 +67,32 @@ export const createRoom = async (
     }
 };
 
-export const addUsersToRoom = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-) => {
-    const usersEmails: string[] = req.body.usersEmails;
-    usersEmails.map(async (userEmail) => {
-        try {
-            const user = await User.findOne({
-                email: userEmail
-            });
-				try {
-					// TODO: on recherche la meme table pour chaque userEmail (opti nécessaire)
-					const room = await Room.findByIdAndUpdate(createRoomId, 
-						{
-							$push: { partIds: user?._id }
-						}
-					);
-				} catch (error) {
-					next(error)
-				}
+// export const addUsersToRoom = async (
+//     req: Request,
+//     res: Response,
+//     next: NextFunction
+// ) => {
+//     const usersEmails: string[] = req.body.usersEmails;
+//     usersEmails.map(async (userEmail) => {
+//         try {
+//             const user = await User.findOne({
+//                 email: userEmail
+//             });
+// 				try {
+// 					// TODO: on recherche la meme table pour chaque userEmail (opti nécessaire)
+// 					const room = await Room.findByIdAndUpdate(createRoomId, 
+// 						{
+// 							$push: { partIds: user?._id }
+// 						}
+// 					);
+// 				} catch (error) {
+// 					next(error)
+// 				}
                 
-        } catch (error) {
-            next(error);
-        }
-    });
-                res.status(200).json("ok");
+//         } catch (error) {
+//             next(error);
+//         }
+//     });
+//                 res.status(200).json("ok");
 
-};
+// };
