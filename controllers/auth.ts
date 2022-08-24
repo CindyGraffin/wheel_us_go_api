@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { User } from "../models/User";
 import bcrypt from 'bcryptjs';
+// argon 2i
 import { createError } from "../utils/createError";
 import jwt from 'jsonwebtoken';
 import { IUser } from "../types/IUser";

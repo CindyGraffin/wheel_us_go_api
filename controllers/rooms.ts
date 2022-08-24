@@ -23,7 +23,6 @@ export const createRoom = async (
             placeName: req.body.placeName,
             address: req.body.address,
             theme: req.body.theme,
-            partEmails: req.body.usersEmails,
 			partIds: reqpartIds,
             aperoWheel: {
                 setUp: req.body.wheelSetUp,
@@ -37,13 +36,10 @@ export const createRoom = async (
         });
         try {
             newRoom.save(() => {
-                const usersEmails: string[] = req.body.usersEmails;
-                usersEmails.map(async (userEmail) => {
+                reqpartIds.map(async (reqpartid) => {
                     try {
-                        const user = await User.findOneAndUpdate(
-                            {
-                                email: userEmail,
-                            },
+                        const user = await User.findByIdAndUpdate(
+                            reqpartid,
                             {
                                 $push: { roomsId: newRoom._id },
                             }
