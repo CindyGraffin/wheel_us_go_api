@@ -19,3 +19,16 @@ export const getAllUsers = async (req: Request, res: Response, next: NextFunctio
     }
 }
 
+export const getUserFriends = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const user = await User.findById(req.params.id).populate('roomsId')
+        // const user = await User.findById(req.params.id).populate('friendsId')
+        console.log(user);
+        
+        res.status(200).json(user)
+    } catch (error) {
+        next(error); 
+    }
+}
+
+
