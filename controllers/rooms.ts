@@ -70,6 +70,7 @@ export const addUsersToRoom = async (
                 email: userEmail
             });
 				try {
+					// TODO: on recherche la meme table pour chaque userEmail (opti nécessaire)
 					const room = await Room.findByIdAndUpdate(createRoomId, 
 						{
 							$push: { partIds: user?._id }
