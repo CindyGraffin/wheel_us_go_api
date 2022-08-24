@@ -1,6 +1,4 @@
-
-import { ObjectId } from "mongodb";
-import mongoose, { Types } from "mongoose";
+import mongoose from "mongoose";
 import { IRoom } from "../types/IRoom";
 const {Schema} = mongoose;
 
@@ -25,9 +23,9 @@ const RoomSchema = new Schema<IRoom>({
         type: String,
         required: true
     },
-    partEmails: [{
-        type: String,
-        required: true 
+    partIds: [{
+        type: Schema.Types.ObjectId,
+        required: true
     }],
     aperoWheel: {
         setUp: {
