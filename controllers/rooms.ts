@@ -38,7 +38,6 @@ export const createRoom = async (
         try {
             newRoom.save(() => {
                 const usersEmails: string[] = req.body.usersEmails;
-                createRoomId = newRoom._id;
                 usersEmails.map(async (userEmail) => {
                     try {
                         const user = await User.findOneAndUpdate(
