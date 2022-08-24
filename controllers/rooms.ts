@@ -11,9 +11,9 @@ export const createRoom = async (
 ) => {
 	
 	const requestIds: string[] = req.body.partIds
-	const reqpartIds: ObjectId[] = []
+	const partIds: ObjectId[] = []
 	requestIds.forEach(id => {
-		reqpartIds.push(new mongoose.Types.ObjectId(id))
+		partIds.push(new mongoose.Types.ObjectId(id))
 	});
     try {
         const newRoom = new Room({
@@ -23,7 +23,7 @@ export const createRoom = async (
             placeName: req.body.placeName,
             address: req.body.address,
             theme: req.body.theme,
-			partIds: reqpartIds,
+			partIds: partIds,
             aperoWheel: {
                 setUp: req.body.wheelSetUp,
                 launched: false,
@@ -36,7 +36,7 @@ export const createRoom = async (
         });
         try {
             newRoom.save(() => {
-                reqpartIds.map(async (reqpartid) => {
+                partIds.map(async (reqpartid) => {
                     try {
                         const user = await User.findByIdAndUpdate(
                             reqpartid,
