@@ -36,10 +36,10 @@ export const createRoom = async (
         });
         try {
             newRoom.save(() => {
-                partIds.map(async (reqpartid) => {
+                partIds.map(async (id) => {
                     try {
                         const user = await User.findByIdAndUpdate(
-                            reqpartid,
+                            id,
                             {
                                 $push: { roomsId: newRoom._id },
                             }
