@@ -33,7 +33,7 @@ export const login = async(req: Request, res: Response, next: NextFunction): Pro
     try {
         const user = await UserModel.findOne({
             email: req.body.email
-        })
+        }).populate('friendsId').populate('roomsId')
         if (!user) {
             return next(createError(404, 'User not found'));
         }
@@ -45,7 +45,7 @@ export const login = async(req: Request, res: Response, next: NextFunction): Pro
         const token = jwt.sign(
             {id: user.id},
             randomKey,
-            {expiresIn: '1h'}
+            {expiresIn: '24h'}
         )
         // we ignore next line because typescript will say user._doc doesn't exist on type IUser
         // @ts-ignore
