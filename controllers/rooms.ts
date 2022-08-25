@@ -28,7 +28,7 @@ export const createRoom = async (
                 setUp: req.body.wheelSetUp,
                 launched: false,
                 person: undefined,
-            },
+            },  
             dresscode: {
                 setUp: req.body.dresscodeSetUp,
                 description: req.body.dresscodeDesc,
