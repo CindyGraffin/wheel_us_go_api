@@ -33,7 +33,7 @@ export const login = async(req: Request, res: Response, next: NextFunction): Pro
     try {
         const user = await UserModel.findOne({
             email: req.body.email
-        })
+        }).populate('friendsId').populate('roomsId')
         if (!user) {
             return next(createError(404, 'User not found'));
         }
