@@ -1,6 +1,6 @@
 import mongoose, { Schema, Types } from "mongoose";
 
-interface IUser {
+type User = {
     firstName: string;
     lastName: string;
     email: string;
@@ -17,4 +17,4 @@ interface IUser {
     groupsId?: [Schema.Types.ObjectId];
 }
 
-export {IUser};
+export {User};

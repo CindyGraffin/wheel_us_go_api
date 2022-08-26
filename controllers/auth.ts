@@ -1,15 +1,16 @@
 import { Request, Response, NextFunction } from "express";
-import { User } from "../models/User";
+import { UserModel } from "../models/User";
 import bcrypt from 'bcryptjs';
+// argon 2i
 import { createError } from "../utils/createError";
 import jwt from 'jsonwebtoken';
-import { IUser } from "../types/IUser";
+import { User } from "../types/User";
 
 export const register = async(req: Request, res: Response, next: NextFunction) => {
     try {
         const salt = bcrypt.genSaltSync(10);
         const hashPassword = bcrypt.hashSync(req.body.password, salt)
-        const newUser = new User({
+        const newUser = new UserModel({
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
@@ -28,11 +29,11 @@ export const register = async(req: Request, res: Response, next: NextFunction) =
     }
 }
 
-export const login = async(req: Request, res: Response, next: NextFunction): Promise<IUser | Error | void>  => {
+export const login = async(req: Request, res: Response, next: NextFunction): Promise<User | Error | void>  => {
     try {
-        const user = await User.findOne({
+        const user = await UserModel.findOne({
             email: req.body.email
-        })
+        }).populate('friendsId').populate('roomsId')
         if (!user) {
             return next(createError(404, 'User not found'));
         }

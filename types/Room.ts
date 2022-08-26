@@ -1,25 +1,25 @@
 import mongoose, {Schema, Types } from "mongoose";
 
-interface WheelAperoType {
+type WheelAperoType = {
     setUp: boolean;
     launched: boolean;
     person?: Schema.Types.ObjectId;
 }
 
-interface Dresscode {
+type Dresscode = {
     setUp: boolean;
     description?: string;
 }
 
-interface IRoom {
+type Room = {
     creatorId: Schema.Types.ObjectId;
     placeName: string;
     address: string;
     date: Date;
-    partEmails: [string];
+    partIds: [Schema.Types.ObjectId],
     theme: string;
     aperoWheel: WheelAperoType;
     dresscode: Dresscode;
 }
 
-export {IRoom, WheelAperoType};
+export {Room, WheelAperoType};

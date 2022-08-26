@@ -1,10 +1,8 @@
-
-import { ObjectId } from "mongodb";
-import mongoose, { Types } from "mongoose";
-import { IRoom } from "../types/IRoom";
+import mongoose from "mongoose";
+import { Room } from "../types/Room";
 const {Schema} = mongoose;
 
-const RoomSchema = new Schema<IRoom>({
+const RoomSchema = new Schema<Room>({
     creatorId: {
         type: Schema.Types.ObjectId,
         required: true
@@ -25,9 +23,9 @@ const RoomSchema = new Schema<IRoom>({
         type: String,
         required: true
     },
-    partEmails: [{
-        type: String,
-        required: true 
+    partIds: [{
+        type: Schema.Types.ObjectId,
+        required: true
     }],
     aperoWheel: {
         setUp: {
@@ -54,6 +52,6 @@ const RoomSchema = new Schema<IRoom>({
 }, {timestamps: true}
 )
 
-const Room = mongoose.model<IRoom>('Room', RoomSchema)
+const RoomModel = mongoose.model<Room>('Room', RoomSchema)
 
-export {Room};
+export {RoomModel};
