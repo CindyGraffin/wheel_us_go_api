@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import { usersRouter, authRouter } from './routes/index';
 import cookieParser from "cookie-parser";
 import { roomsRouter } from './routes/rooms';
+import { searchRouter } from './routes/search';
 
 
 const app = express();
@@ -33,7 +34,7 @@ app.use(express.json());
 app.use('/api/auth', authRouter)
 
 app.use('/api/users', usersRouter)
-
+app.use('/api/search', searchRouter)
 app.use('/api/rooms', roomsRouter)
 app.use('/api/groups', (req: Request, res: Response) => {
     res.send('groups endpoint')
