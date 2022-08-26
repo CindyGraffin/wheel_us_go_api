@@ -19,3 +19,15 @@ export const getAllUsers = async (req: Request, res: Response, next: NextFunctio
     }
 }
 
+export const getUsersBySearch = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        
+        const searchUsers = await UserModel.find({
+            "fullName": "alain eljefe"
+            // const search = req.query.fullname; "fullName":  { "$regex": search, "$options" : "i"}
+    })
+    res.status(200).json(searchUsers)
+    } catch (error) {
+        next(error); 
+    }
+}

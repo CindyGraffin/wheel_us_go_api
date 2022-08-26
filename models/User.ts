@@ -12,6 +12,10 @@ const UserSchema = new Schema<User>({
         type: String,
         required: true
     },
+    fullName: {
+        type: String,
+        
+    },
     email: {
         type: String,
         required: true,

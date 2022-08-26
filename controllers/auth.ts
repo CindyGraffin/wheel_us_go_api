@@ -13,6 +13,7 @@ export const register = async(req: Request, res: Response, next: NextFunction) =
         const newUser = new UserModel({
             firstName: req.body.firstName,
             lastName: req.body.lastName,
+            fullName: req.body.firstName + ' ' + req.body.lastName,
             email: req.body.email,
             role: 'user',
             userImg: 'https://images.unsplash.com/photo-1613318286980-4b3dd8475772?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
