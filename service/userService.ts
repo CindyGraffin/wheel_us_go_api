@@ -4,8 +4,12 @@ import { RegisterUserDto } from "../dtos/RegisterUserDTO";
 import { createError } from "../utils";
 import { NextFunction } from "express";
 import { Credentials } from "../types/Credentials";
+import { User } from "../types/User";
+import mongoose from "mongoose";
+import { Room } from "../types/Room";
 
 export class UserService {
+
     register = async (user: RegisterUserDto): Promise<RegisterUserDto> => {
         const salt = bcrypt.genSaltSync(10);
         const hashPassword = bcrypt.hashSync(user.password!, salt);
@@ -25,7 +29,7 @@ export class UserService {
         return await newUser.save();
     };
 
-    login = async (credentials: Credentials, next: NextFunction) => {
+    login = async (credentials: Credentials, next: NextFunction): Promise<User | void> => {
         const user = await UserModel.findOne({
             email: credentials.email,
         })
@@ -42,11 +46,20 @@ export class UserService {
             return next(createError(400, "Wrong password or username"));
         }
 
-        // we ignore next line because typescript will say user._doc doesn't exist on type IUser
+        // we ignore next line because typescript will say user._doc doesn't exist on type User
         // @ts-ignore
         const { password, ...othersInfos } = user._doc;
         return {...othersInfos}
     };
+
+    addRoomIdToUser = async(id: mongoose.Schema.Types.ObjectId, newRoom: Room) => {
+        const user = await UserModel.findByIdAndUpdate(
+            id,
+            {
+                $push: { roomsId: newRoom._id },
+            }
+        );
+    }
 }
 
 export const userService = Object.freeze(new UserService());
