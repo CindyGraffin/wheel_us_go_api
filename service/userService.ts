@@ -22,6 +22,9 @@ export class UserService {
         });
         return await newUser.save();
     };
+    findFriendsByUserId = (id: string) => {
+        return UserModel.findById(id).orFail().populate('users').then((user) =>  {return user?.friendsId})
+    }
 }
 
 export const userService = Object.freeze(new UserService());
