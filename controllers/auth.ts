@@ -11,8 +11,8 @@ export const register = async(req: Request, res: Response, next: NextFunction) =
         const salt = bcrypt.genSaltSync(10);
         const hashPassword = bcrypt.hashSync(req.body.password, salt)
         const newUser = new UserModel({
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
             email: req.body.email,
             role: 'user',
             userImg: 'https://images.unsplash.com/photo-1613318286980-4b3dd8475772?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80',
@@ -33,7 +33,7 @@ export const login = async(req: Request, res: Response, next: NextFunction): Pro
     try {
         const user = await UserModel.findOne({
             email: req.body.email
-        })
+        }).populate('friendsId').populate('roomsId')
         if (!user) {
             return next(createError(404, 'User not found'));
         }
