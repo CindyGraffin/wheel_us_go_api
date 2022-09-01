@@ -42,7 +42,7 @@ app.use('/api/groups', (req: Request, res: Response) => {
 
 // allow to send a customized object error when an error occurs
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-    const errorStatus = err.status || 500;
+    const errorStatus = err.status || 400;
     const errorMessage = err.message || 'Something went wrong';
     return res.status(errorStatus).json({
         success: false,
