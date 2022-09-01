@@ -1,5 +1,5 @@
 import { Room } from "../types/Room";
 
-export interface CreateRoomDto extends Omit<Room, "aperoWheel.launched" | "aperoWheel.person">{
+export interface createRoomDto extends Omit<Room, "aperoWheel.launched" | "aperoWheel.person">{
 
 }

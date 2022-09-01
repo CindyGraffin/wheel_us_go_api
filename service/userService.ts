@@ -1,10 +1,17 @@
 import { RegisterUserDto } from './../dtos/RegisterUserDto';
 import { UserModel } from "../models/User";
 import bcrypt from "bcryptjs";
+import { registerUserDto } from "../dtos/registerUserDto";
+import { createError } from "../utils";
+import { NextFunction } from "express";
+import { Credentials } from "../types/Credentials";
+import { User } from "../types/User";
+import mongoose from "mongoose";
+import { Room } from "../types/Room";
 
 export class UserService {
 
-    register = async (user: RegisterUserDto): Promise<RegisterUserDto> => {
+    register = async (user: registerUserDto): Promise<registerUserDto> => {
         const salt = bcrypt.genSaltSync(10);
         const hashPassword = bcrypt.hashSync(user.password!, salt);
         const newUser = new UserModel({
@@ -17,13 +24,45 @@ export class UserService {
             birthday: "2012-04-23T18:25:43.511Z",
             password: hashPassword,
             city: user.city,
-            outingPart: 0,
+            outingPart: 0, 
             outingCre: 0,
         });
         return await newUser.save();
     };
+
+    login = async (credentials: Credentials): Promise<User> => {
+        const user = await UserModel.findOne({
+            email: credentials.email,
+        })
+            .populate("friendsId")
+            .populate("roomsId");
+        if (!user) {
+            throw createError(400, "Wrong password or username");
+        }
+        const goodPassword = await bcrypt.compareSync(
+            credentials.password,
+            user?.password || ""
+        );
+        if (!goodPassword) {
+            throw createError(400, "Wrong password or username");
+        }
+
+        // we ignore next line because typescript will say user._doc doesn't exist on type User
+        // @ts-ignore
+        const { password, ...othersInfos } = user._doc;
+        return {...othersInfos}
+    };
+
+    addRoomIdToUser = async(id: mongoose.Schema.Types.ObjectId, newRoom: Room) => {
+        const user = await UserModel.findByIdAndUpdate(
+            id,
+            {
+                $push: { roomsId: newRoom._id },
+            }
+        );
     findFriendsByUserId = (id: string) => {
         return UserModel.findById(id).orFail().populate('users').then((user) =>  {return user?.friendsId})
+
     }
 }
 

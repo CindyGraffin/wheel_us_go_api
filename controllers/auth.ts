@@ -18,8 +18,8 @@ export class AuthController {
     login = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const randomKey = `${process.env.JWT}`;
-            const user = await this.service.login(req.body, next);
-            const token = jwt.sign({ id: user.id }, randomKey, {
+            const user = await this.service.login(req.body);
+            const token = jwt.sign({ id: user._id }, randomKey, {
                 expiresIn: "1h",
             });
             res.cookie("access_token", token, {

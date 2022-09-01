@@ -1,6 +1,6 @@
 
 import mongoose, { Schema } from "mongoose";
-import { CreateRoomDto } from "../dtos/CreateRoomDto";
+import { createRoomDto } from "../dtos/createRoomDto";
 import { RoomModel } from "../models/Room";
 import { userService } from "./userService";
 
@@ -8,7 +8,7 @@ import { userService } from "./userService";
 
 export class RoomService {
 
-    createRoom = async (room: CreateRoomDto): Promise<CreateRoomDto> => {
+    createRoom = async (room: createRoomDto): Promise<createRoomDto> => {
         const requestIds: mongoose.Schema.Types.ObjectId[] = room.partIds;
         const partIds: mongoose.Schema.Types.ObjectId[] = [];
         requestIds.forEach((id) => {
