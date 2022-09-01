@@ -1,10 +1,11 @@
 import { NextFunction, Request, Response } from "express";
 import { UserModel } from "../models/User";
 
-const addFriend = async (req: Request, res: Response, next: NextFunction) => {
+// GetFriendsByUserId -> service
+const getFriendsByUserId = async(req: Request, res: Response, next: NextFunction) => {
     try {
-        const user = await UserModel.findByIdAndUpdate()
-    } catch (error) {
         
+    } catch (error) {
+        console.log(error)
     }
 }

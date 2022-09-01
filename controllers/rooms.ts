@@ -19,7 +19,7 @@ export const createRoom = async (
         const newRoom = new RoomModel({
             _id: new mongoose.Types.ObjectId(),
             creatorId: new mongoose.Types.ObjectId(req.body.creatorId),
-            date: new Date(),
+            date: req.body.date,
             placeName: req.body.placeName,
             address: req.body.address,
             theme: req.body.theme,

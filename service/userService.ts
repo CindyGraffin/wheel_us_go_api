@@ -1,6 +1,6 @@
 import { UserModel } from "../models/User";
 import bcrypt from "bcryptjs";
-import { RegisterUserDto } from "../dtos/RegisterUserDTO";
+import { RegisterUserDto } from "../dtos/RegisterUserDto";
 
 export class UserService {
     register = async (
@@ -23,6 +23,10 @@ export class UserService {
         });
         return await newUser.save();
     };
+
+    findFriendsByUserId = (id: string) => {
+        return UserModel.findById(id).orFail().populate('users').then((user) =>  {return user?.friendsId})
+    }
 }
 
 export const userService = Object.freeze(new UserService());
