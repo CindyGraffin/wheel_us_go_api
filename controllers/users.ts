@@ -1,6 +1,7 @@
 import { UserModel } from "../models/User";
 import { NextFunction, Request, Response } from "express";
 
+
 export const getUserById = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const user = await UserModel.findById(req.params.id).populate('friendsId').populate('roomsId')

@@ -1,11 +1,10 @@
+import { RegisterUserDto } from './../dtos/RegisterUserDto';
 import { UserModel } from "../models/User";
 import bcrypt from "bcryptjs";
-import { RegisterUserDto } from "../dtos/RegisterUserDto";
 
 export class UserService {
-    register = async (
-        user: RegisterUserDto
-    ): Promise<RegisterUserDto> => {
+
+    register = async (user: RegisterUserDto): Promise<RegisterUserDto> => {
         const salt = bcrypt.genSaltSync(10);
         const hashPassword = bcrypt.hashSync(user.password!, salt);
         const newUser = new UserModel({
@@ -23,10 +22,6 @@ export class UserService {
         });
         return await newUser.save();
     };
-
-    findFriendsByUserId = (id: string) => {
-        return UserModel.findById(id).orFail().populate('users').then((user) =>  {return user?.friendsId})
-    }
 }
 
 export const userService = Object.freeze(new UserService());
