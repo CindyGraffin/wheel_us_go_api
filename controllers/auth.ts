@@ -9,7 +9,7 @@ export class AuthController {
     register = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const newUser = await this.service.register(req.body);
-            res.status(200).send(newUser);
+            res.status(200).json(newUser);
         } catch (error) {
             next(error);
         }
@@ -26,7 +26,7 @@ export class AuthController {
                 httpOnly: true,
             })
                 .status(200)
-                .send(user);
+                .json(user);
         } catch (error) {
             next(error);
         }

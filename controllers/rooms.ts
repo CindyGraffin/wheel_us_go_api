@@ -9,7 +9,7 @@ export class RoomController {
     createRoom = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const newRoom = await this.service.createRoom(req.body);
-            res.status(200).send(newRoom);
+            res.status(200).json(newRoom);
         } catch (error) {
             next(error);
         } 
@@ -18,11 +18,20 @@ export class RoomController {
     getRoomsByCreatorId = async(req: Request, res: Response, next: NextFunction) => {
         try {
             const rooms = await this.service.getRoomsByCreatorId(req.params.id);
-            res.status(200).send(rooms)
+            res.status(200).json(rooms)
         } catch (error) {
             next(error)
         }
     } 
+
+    getRoomsByUserId = async(req: Request, res: Response, next: NextFunction) => {
+        try {
+            const rooms = await this.service.getRoomsByUserId(req.params.id)
+            res.status(200).json(rooms)
+        } catch (error) {
+            next(error)
+        }
+    }
 
 }
 
