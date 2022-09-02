@@ -1,8 +1,4 @@
 import { Request, Response, NextFunction } from "express";
-import { ObjectId } from "mongodb";
-import mongoose, { Schema } from "mongoose";
-import { RoomModel } from "../models/Room";
-import { UserModel } from "../models/User";
 import { roomService } from "../service/roomService";
 
 
@@ -27,5 +23,6 @@ export class RoomController {
             next(error)
         }
     } 
+
 }
 

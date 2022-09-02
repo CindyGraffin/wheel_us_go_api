@@ -32,12 +32,7 @@ app.use(express.json());
 
 
 app.use('/api/users', usersRouter)
-
 app.use('/api/rooms', roomsRouter)
-// app.use('/api/groups', (req: Request, res: Response) => {
-    //     res.send('groups endpoint')
-    // })
-    
 app.use('/api/auth', authRouter)
 
 // allow to send a customized object error when an error occurs

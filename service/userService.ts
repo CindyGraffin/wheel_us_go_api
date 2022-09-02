@@ -3,7 +3,6 @@ import { UserModel } from "../models/User";
 import bcrypt from "bcryptjs";
 import { registerUserDto } from "../dtos/registerUserDto";
 import { createError } from "../utils";
-import { NextFunction } from "express";
 import { Credentials } from "../types/Credentials";
 import { User } from "../types/User";
 import mongoose from "mongoose";
@@ -54,12 +53,23 @@ export class UserService {
     };
 
     addRoomIdToUser = async(id: mongoose.Schema.Types.ObjectId, newRoom: Room) => {
-        const user = await UserModel.findByIdAndUpdate(
+        await UserModel.findByIdAndUpdate(
             id,
             {
                 $push: { roomsId: newRoom._id },
             }
         );
+    }
+
+    getUserById = async (id: string): Promise<User | null> => {
+        console.log(id);
+        const user = await UserModel.findById(id)
+        return user;
+    }
+
+    getAllUsers = async(): Promise<User[]> => {
+        const users = await UserModel.find()
+        return users; 
     }
 }
 
