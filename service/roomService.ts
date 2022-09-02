@@ -41,12 +41,11 @@ export class RoomService {
         return newRoom;
     };
 
-    getRoomsByUserId = async(id: string): Promise<Room[]> => {
+    getRoomsByCreatorId = async(id: string): Promise<Room[]> => {
         console.log(id);
         const rooms = await RoomModel.find(
             {creatorId: id}
         ).exec()
-        
         return rooms 
     }
 }

@@ -7,6 +7,6 @@ const roomsRouter = express.Router()
 const roomController = new RoomController();
 
 roomsRouter.post('/createroom', roomController.createRoom)
-roomsRouter.get('/:id', roomController.getRoomsByUserId)
+roomsRouter.get('/:id', roomController.getRoomsByCreatorId)
 
 export {roomsRouter};

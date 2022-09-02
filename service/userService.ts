@@ -1,4 +1,4 @@
-import { RegisterUserDto } from './../dtos/RegisterUserDto';
+
 import { UserModel } from "../models/User";
 import bcrypt from "bcryptjs";
 import { registerUserDto } from "../dtos/registerUserDto";
@@ -60,9 +60,6 @@ export class UserService {
                 $push: { roomsId: newRoom._id },
             }
         );
-    findFriendsByUserId = (id: string) => {
-        return UserModel.findById(id).orFail().populate('users').then((user) =>  {return user?.friendsId})
-
     }
 }
 

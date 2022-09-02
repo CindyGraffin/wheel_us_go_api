@@ -19,13 +19,13 @@ export class RoomController {
         } 
     }
 
-    getRoomsByUserId = async(req: Request, res: Response, next: NextFunction) => {
+    getRoomsByCreatorId = async(req: Request, res: Response, next: NextFunction) => {
         try {
-            const rooms = await this.service.getRoomsByUserId(req.params.id);
+            const rooms = await this.service.getRoomsByCreatorId(req.params.id);
             res.status(200).send(rooms)
         } catch (error) {
             next(error)
         }
-    }
+    } 
 }
 
