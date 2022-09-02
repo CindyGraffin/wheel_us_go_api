@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
-import { Room } from "../types/Room";
+import { RoomDto } from "../dtos/room.dto";
 const {Schema} = mongoose;
 
-const RoomSchema = new Schema<Room>({
+const RoomSchema = new Schema<RoomDto>({
     creatorId: {
         type: Schema.Types.ObjectId,
         required: true
@@ -52,6 +52,6 @@ const RoomSchema = new Schema<Room>({
 }, {timestamps: true}
 )
 
-const RoomModel = mongoose.model<Room>('Room', RoomSchema)
+const RoomModel = mongoose.model<RoomDto>('Room', RoomSchema)
 
 export {RoomModel};

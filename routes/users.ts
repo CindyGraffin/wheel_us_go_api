@@ -1,14 +1,15 @@
-import express from 'express'
-import { getAllUsers, getUserById } from '../controllers/users';
-import { verifyToken } from '../utils';
 
-const usersRouter = express.Router()
+import express from "express";
+import { UserController } from "../controllers/users";
+
+const usersRouter = express.Router();
+
+const userController = new UserController();
 
 
-// GET ALL USERS
-usersRouter.get('/', verifyToken, getAllUsers)
+usersRouter.get("/", userController.getAllUsers);
+usersRouter.get("/:id", userController.getUserById);
 
-// GET ONE USER
-usersRouter.get('/:id', getUserById)
 
-export {usersRouter};
+
+export { usersRouter };
