@@ -1,6 +1,5 @@
-
+import { createRoomDto } from './../dtos/CreateRoomDto';
 import mongoose, { Schema } from "mongoose";
-import { createRoomDto } from "../dtos/createRoomDto";
 import { RoomModel } from "../models/Room";
 import { userService } from "./userService";
 

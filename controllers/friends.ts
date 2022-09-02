@@ -7,8 +7,8 @@ export class FriendsController {
 
     getFriendsByUserId = async(req: Request, res: Response, next: NextFunction) => {
         try {
-            const getAllFriendsByUserId = await this.service.findFriendsByUserId(req.body);
-            res.status(200).send(getAllFriendsByUserId);
+            const friends = await this.service.getFriendsByUserId(req.params.id);
+            res.status(200).send(friends);
         } catch (error) {
             console.log(error)
         }
