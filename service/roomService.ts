@@ -2,6 +2,9 @@ import { createRoomDto } from './../dtos/CreateRoomDto';
 import mongoose, { Schema } from "mongoose";
 import { RoomModel } from "../models/Room";
 import { userService } from "./userService";
+import {Room} from '../types/Room';
+import { UserController } from "../controllers/users";
+import { UserModel } from "../models/User";
 
 
 
@@ -13,6 +16,7 @@ export class RoomService {
         requestIds.forEach((id) => {
             partIds.push(id);
         });
+        partIds.push(room.creatorId)
         const newRoom = new RoomModel({
             _id: new mongoose.Types.ObjectId(),
             creatorId: room.creatorId,
@@ -38,6 +42,20 @@ export class RoomService {
         })
         return newRoom;
     };
+
+    getRoomsByCreatorId = async(id: string): Promise<Room[]> => {
+        const rooms = await RoomModel.find(
+            {creatorId: id}
+        ).exec()
+        return rooms 
+    }
+
+    getRoomsByUserId = async(id: string): Promise<any> => {
+        const userRooms = await UserModel.findById(id).populate('roomsId').select('roomsId')
+        return userRooms;
+    }
+
+    
 }
 
 export const roomService = Object.freeze(new RoomService());

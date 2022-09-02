@@ -55,9 +55,20 @@ export class UserService {
     id: mongoose.Schema.Types.ObjectId,
     newRoom: Room
   ) => {
-    const user = await UserModel.findByIdAndUpdate(id, {
+    await UserModel.findByIdAndUpdate(id, {
       $push: { roomsId: newRoom._id },
     });
+  };
+
+  getUserById = async (id: string): Promise<User | null> => {
+    console.log(id);
+    const user = await UserModel.findById(id);
+    return user;
+  };
+
+  getAllUsers = async (): Promise<User[]> => {
+    const users = await UserModel.find();
+    return users;
   };
 
   getFriendsByUserId = async (id: string): Promise<getFriendsDto> => {
