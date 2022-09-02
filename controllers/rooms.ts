@@ -32,6 +32,5 @@ export class RoomController {
             next(error)
         }
     }
-
 }
 
