@@ -1,16 +1,15 @@
 
 import { UserModel } from "../models/User";
 import bcrypt from "bcryptjs";
-import { registerUserDto } from "../dtos/registerUserDto";
 import { createError } from "../utils";
 import { Credentials } from "../types/Credentials";
-import { User } from "../types/User";
 import mongoose from "mongoose";
-import { Room } from "../types/Room";
+import { RegisterUserDto, UserDto } from "../dtos/users.dto";
+import { RoomDto } from "../dtos/room.dto";
 
 export class UserService {
 
-    register = async (user: registerUserDto): Promise<registerUserDto> => {
+    register = async (user: RegisterUserDto): Promise<RegisterUserDto> => {
         const salt = bcrypt.genSaltSync(10);
         const hashPassword = bcrypt.hashSync(user.password!, salt);
         const newUser = new UserModel({
@@ -29,7 +28,7 @@ export class UserService {
         return await newUser.save();
     };
 
-    login = async (credentials: Credentials): Promise<User> => {
+    login = async (credentials: Credentials): Promise<UserDto> => {
         const user = await UserModel.findOne({
             email: credentials.email,
         })
@@ -52,7 +51,7 @@ export class UserService {
         return {...othersInfos}
     };
 
-    addRoomIdToUser = async(id: mongoose.Schema.Types.ObjectId, newRoom: Room) => {
+    addRoomIdToUser = async(id: mongoose.Schema.Types.ObjectId, newRoom: RoomDto) => {
         await UserModel.findByIdAndUpdate(
             id,
             {
@@ -61,13 +60,12 @@ export class UserService {
         );
     }
 
-    getUserById = async (id: string): Promise<User | null> => {
-        console.log(id);
+    getUserById = async (id: string): Promise<UserDto | null> => {
         const user = await UserModel.findById(id)
         return user;
     }
 
-    getAllUsers = async(): Promise<User[]> => {
+    getAllUsers = async(): Promise<UserDto[]> => {
         const users = await UserModel.find()
         return users; 
     }

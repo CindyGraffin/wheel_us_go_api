@@ -1,4 +1,5 @@
 import mongoose, {Schema, Types } from "mongoose";
+import { Dto } from "./dto";
 
 type WheelAperoType = {
     setUp: boolean;
@@ -11,7 +12,7 @@ type Dresscode = {
     description?: string;
 }
 
-type Room = {
+export interface RoomDto extends Dto {
     _id: mongoose.Schema.Types.ObjectId;
     creatorId: mongoose.Schema.Types.ObjectId;
     placeName: string;
@@ -23,4 +24,6 @@ type Room = {
     dresscode: Dresscode;
 }
 
-export {Room, WheelAperoType};
+export interface CreateRoomDto extends Omit<RoomDto, "aperoWheel.launched" | "aperoWheel.person">{
+
+}

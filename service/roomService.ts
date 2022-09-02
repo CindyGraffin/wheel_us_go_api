@@ -1,17 +1,17 @@
-
 import mongoose, { Schema } from "mongoose";
-import { createRoomDto } from "../dtos/createRoomDto";
 import { RoomModel } from "../models/Room";
 import { userService } from "./userService";
-import {Room} from '../types/Room';
 import { UserController } from "../controllers/users";
 import { UserModel } from "../models/User";
+import { CreateRoomDto, RoomDto } from "../dtos/room.dto";
+import { UserDto } from "../dtos/users.dto";
+import { ObjectId } from "mongodb";
 
 
 
 export class RoomService {
 
-    createRoom = async (room: createRoomDto): Promise<createRoomDto> => {
+    createRoom = async (room: CreateRoomDto): Promise<CreateRoomDto> => {
         const requestIds: mongoose.Schema.Types.ObjectId[] = room.partIds;
         const partIds: mongoose.Schema.Types.ObjectId[] = [];
         requestIds.forEach((id) => {
@@ -44,20 +44,18 @@ export class RoomService {
         return newRoom;
     };
 
-    getRoomsByCreatorId = async(id: string): Promise<Room[]> => {
+    getRoomsByCreatorId = async(id: string): Promise<RoomDto[]> => {
         const rooms = await RoomModel.find(
             {creatorId: id}
         ).exec()
         return rooms 
     }
 
-    getRoomsByUserId = async(id: string): Promise<any> => {
-        const userRooms = await UserModel.findById(id).populate('roomsId').select('roomsId')
+    getRoomsByUserId = async(id: string): Promise<mongoose.Schema.Types.ObjectId[] | undefined> => {
+        const response = await UserModel.findById(id).orFail().populate('roomsId').select('roomsId')
+        const userRooms = response.roomsId
         return userRooms;
     }
-
-    
 }
 
 export const roomService = Object.freeze(new RoomService());
-

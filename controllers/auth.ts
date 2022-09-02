@@ -2,11 +2,12 @@ import { Request, Response, NextFunction } from "express";
 import { userService } from "../service/userService";
 import jwt from "jsonwebtoken";
 
+
 export class AuthController {
 
     private service = userService;
 
-    register = async (req: Request, res: Response, next: NextFunction) => {
+    register = async (req: Request, res: Response, next: NextFunction): Promise<void>=> {
         try {
             const newUser = await this.service.register(req.body);
             res.status(200).json(newUser);
@@ -15,7 +16,7 @@ export class AuthController {
         }
     };
 
-    login = async (req: Request, res: Response, next: NextFunction) => {
+    login = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const randomKey = `${process.env.JWT}`;
             const user = await this.service.login(req.body);
