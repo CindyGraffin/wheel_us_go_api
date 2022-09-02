@@ -3,6 +3,7 @@ import mongoose, { Schema } from "mongoose";
 import { createRoomDto } from "../dtos/createRoomDto";
 import { RoomModel } from "../models/Room";
 import { userService } from "./userService";
+import {Room} from '../types/Room';
 
 
 
@@ -39,6 +40,15 @@ export class RoomService {
         })
         return newRoom;
     };
+
+    getRoomsByUserId = async(id: string): Promise<Room[]> => {
+        console.log(id);
+        const rooms = await RoomModel.find(
+            {creatorId: id}
+        ).exec()
+        
+        return rooms 
+    }
 }
 
 export const roomService = Object.freeze(new RoomService());
