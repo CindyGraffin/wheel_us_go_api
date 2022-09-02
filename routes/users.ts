@@ -1,18 +1,15 @@
-import { FriendsController } from "./../controllers/friends";
+
 import express from "express";
-import { getAllUsers, getUserById } from "../controllers/users";
-import { verifyToken } from "../utils";
+import { UserController } from "../controllers/users";
 
 const usersRouter = express.Router();
-const friendsController = new FriendsController();
 
-// GET ALL USERS
-usersRouter.get("/", getAllUsers);
+const userController = new UserController();
 
-// GET ONE USER
-usersRouter.get("/getbyid/:id", getUserById);
 
-// GET FRIENDS BY USER ID
-usersRouter.get("/friends/:id", friendsController.getFriendsByUserId);
+usersRouter.get("/", userController.getAllUsers);
+usersRouter.get("/:id", userController.getUserById);
+
+
 
 export { usersRouter };
