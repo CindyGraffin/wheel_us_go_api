@@ -10,11 +10,8 @@ export class FriendsController {
             const friends = await this.service.getFriendsByUserId(req.params.id);
             res.status(200).send(friends);
         } catch (error) {
-            console.log(error)
+            next(error)
         }
     }
 
 }
-
-// GetFriendsByUserId -> service
-
