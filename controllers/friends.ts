@@ -1,4 +1,3 @@
-import { getFriendsDto } from './../dtos/GetFriendsDto';
 import { userService } from './../service/userService';
 import { NextFunction, Request, Response } from "express";
 
