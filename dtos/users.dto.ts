@@ -21,4 +21,6 @@ export interface UserDto extends Dto {
 export interface RegisterUserDto extends Omit<UserDto, "friends" | "group" | "userImg" | "birthday" | "outingPart" | "outingCre">{
 }
 
+export interface GetFriendsDto extends Pick<UserDto, "_id" | "firstname"| "lastname">{
 
+}
