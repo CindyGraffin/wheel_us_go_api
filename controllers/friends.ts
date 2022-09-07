@@ -1,10 +1,17 @@
+import { userService } from './../service/userService';
 import { NextFunction, Request, Response } from "express";
-import { UserModel } from "../models/User";
 
-const addFriend = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-        const user = await UserModel.findByIdAndUpdate()
-    } catch (error) {
-        
+
+export class FriendsController {
+    private service = userService
+
+    getFriendsByUserId = async(req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const friends = await this.service.getFriendsByUserId(req.params.id);
+            res.status(200).send(friends);
+        } catch (error) {
+            next(error)
+        }
     }
+
 }

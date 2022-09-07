@@ -1,9 +1,13 @@
 import express from 'express';
-import { createRoom } from '../controllers/rooms';
+import {  RoomController } from '../controllers/rooms';
 import { verifyToken } from '../utils';
 
 const roomsRouter = express.Router()
 
-roomsRouter.post('/createroom', verifyToken, createRoom)
+const roomController = new RoomController();
+
+roomsRouter.post('/createroom', roomController.createRoom)
+roomsRouter.get('/creator/:id', roomController.getRoomsByCreatorId)
+roomsRouter.get('/:id', roomController.getRoomsByUserId)
 
 export {roomsRouter};

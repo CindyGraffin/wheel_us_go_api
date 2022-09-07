@@ -1,14 +1,14 @@
 import mongoose from "mongoose";
-import { User } from "../types/User";
+import { UserDto } from "../dtos/users.dto";
 
 const {Schema} = mongoose;
 
-const UserSchema = new Schema<User>({
-    firstName: {
+const UserSchema = new Schema<UserDto>({
+    firstname: {
         type: String,
         required: true
     },
-    lastName: {
+    lastname: {
         type: String,
         required: true
     },
@@ -65,6 +65,6 @@ const UserSchema = new Schema<User>({
 }, {timestamps: true}
 )
 
-const UserModel = mongoose.model<User>('User', UserSchema)
+const UserModel = mongoose.model<UserDto>('User', UserSchema)
 
 export {UserModel};

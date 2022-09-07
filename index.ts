@@ -30,19 +30,14 @@ app.use(cors());
 app.use(cookieParser())
 app.use(express.json());
 
-app.use('/api/auth', authRouter)
 
 app.use('/api/users', usersRouter)
-
 app.use('/api/rooms', roomsRouter)
-app.use('/api/groups', (req: Request, res: Response) => {
-    res.send('groups endpoint')
-})
-
+app.use('/api/auth', authRouter)
 
 // allow to send a customized object error when an error occurs
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-    const errorStatus = err.status || 500;
+    const errorStatus = err.status || 400;
     const errorMessage = err.message || 'Something went wrong';
     return res.status(errorStatus).json({
         success: false,
