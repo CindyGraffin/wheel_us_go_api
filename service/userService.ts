@@ -76,6 +76,13 @@ export class UserService {
         const users = await UserModel.find();
         return users;
     };
+
+    deleteRoomInUser = async(userId: string, roomId: string): Promise<void> => {
+        const user = await UserModel.findByIdAndUpdate(
+            userId,
+            {$pull: {roomsId: roomId}}
+        ).orFail();
+    }
 }
 
 export const userService = Object.freeze(new UserService());

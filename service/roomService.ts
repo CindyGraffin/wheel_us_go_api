@@ -44,6 +44,11 @@ export class RoomService {
         return newRoom;
     };
 
+    getRoomById = async(id: string) => {
+        const room = await RoomModel.findById(id)
+        return room
+    }
+
     getRoomsByCreatorId = async(id: string): Promise<RoomDto[]> => {
         const rooms = await RoomModel.find(
             {creatorId: id}
@@ -56,6 +61,16 @@ export class RoomService {
         const userRooms = response.roomsId
         return userRooms;
     }
-}
+
+    deleteUserInRoom = async(roomId: string, userId: string) => {
+        await userService.deleteRoomInUser(userId, roomId)
+        const room = await RoomModel.findByIdAndUpdate(
+            roomId,
+            {$pull: {partIds: userId}},
+            {new: true}
+        ).orFail();
+        return room;
+    }
+} 
 
 export const roomService = Object.freeze(new RoomService());

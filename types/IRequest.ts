@@ -1,6 +1,6 @@
 import { Request } from "express";
-import { User } from "./User";
+import { UserDto } from "../dtos/users.dto";
 
 export interface IRequest extends Request {
-    user?: User;
+    user?: UserDto;
 }

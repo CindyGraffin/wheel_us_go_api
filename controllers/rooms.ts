@@ -15,6 +15,15 @@ export class RoomController {
         } 
     }
 
+    getRoomById = async(req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const room = await this.service.getRoomById(req.params.id);
+            res.status(200).json(room)
+        } catch (error) {
+            next(error)
+        }
+    }
+
     getRoomsByCreatorId = async(req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const rooms = await this.service.getRoomsByCreatorId(req.params.id);
@@ -28,6 +37,15 @@ export class RoomController {
         try {
             const rooms = await this.service.getRoomsByUserId(req.params.id)
             res.status(200).json(rooms)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    deleteUserInRoom = async(req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const room = await this.service.deleteUserInRoom(req.params.roomid, req.params.userid)
+            res.status(200).json(room)
         } catch (error) {
             next(error)
         }
