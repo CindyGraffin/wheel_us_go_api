@@ -24,6 +24,15 @@ export class RoomController {
         }
     }
 
+    getRoomByIdWithParts = async(req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const room = await this.service.getRoomByIdWithParts(req.params.id);
+            res.status(200).json(room)
+        } catch (error) {
+            next(error)
+        }
+    }
+
     getRoomsByCreatorId = async(req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const rooms = await this.service.getRoomsByCreatorId(req.params.id);
