@@ -1,12 +1,8 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose from "mongoose";
 import { RoomModel } from "../models/Room";
 import { userService } from "./userService";
-import { UserController } from "../controllers/users";
 import { UserModel } from "../models/User";
 import { CreateRoomDto, RoomDto } from "../dtos/room.dto";
-import { UserDto } from "../dtos/users.dto";
-import { ObjectId } from "mongodb";
-
 
 
 export class RoomService {
