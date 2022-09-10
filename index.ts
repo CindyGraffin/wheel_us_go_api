@@ -6,7 +6,7 @@ import { usersRouter, authRouter } from './routes/index';
 import cookieParser from "cookie-parser";
 import { roomsRouter } from './routes/rooms';
 import { conversationRouter } from './routes/conversations';
-import { messagesRouter } from './routes/messages';
+import { messageRouter } from './routes/messages';
 
 
 const app = express();
@@ -37,7 +37,7 @@ app.use('/api/users', usersRouter)
 app.use('/api/rooms', roomsRouter)
 app.use('/api/auth', authRouter)
 app.use('/api/conversations', conversationRouter)
-app.use('/api/messages', messagesRouter)
+app.use('/api/messages', messageRouter)
 
 // allow to send a customized object error when an error occurs
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {

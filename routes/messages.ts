@@ -1,5 +1,10 @@
 import express from 'express';
+import { MessageController } from '../controllers/message';
 
-const messagesRouter = express.Router()
+const messageRouter = express.Router()
 
-export {messagesRouter};
+const messageController = new MessageController();
+
+messageRouter.post('/newmessage', messageController.addMesssage)
+
+export {messageRouter};
