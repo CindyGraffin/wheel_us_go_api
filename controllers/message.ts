@@ -12,6 +12,14 @@ export class MessageController {
         } catch (error) {
             next(error);
         }
-        
+    }
+
+    getMessages = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const messages = await this.service.getMessages(req.params.conversationId)
+            res.status(200).json(messages)
+        } catch (error) {
+            next(error)
+        }
     }
 }
