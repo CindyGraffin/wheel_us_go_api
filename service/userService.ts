@@ -62,7 +62,7 @@ export class UserService {
         const userFriends = await UserModel.findById(id)
             .orFail()
             .lean()
-            .populate("friendsId", "firstname lastname")
+            .populate("friendsId", "firstname lastname userImg")
             .select("friendsId");
         return userFriends;
     };
