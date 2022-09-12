@@ -1,11 +1,8 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose from "mongoose";
 import { RoomModel } from "../models/Room";
 import { userService } from "./userService";
-import { UserController } from "../controllers/users";
 import { UserModel } from "../models/User";
 import { CreateRoomDto, RoomDto } from "../dtos/room.dto";
-import { UserDto } from "../dtos/users.dto";
-import { ObjectId } from "mongodb";
 
 
 
@@ -48,6 +45,16 @@ export class RoomService {
         const room = await RoomModel.findById(id)
         return room
     }
+
+    getRoomByIdWithParts = async(id: string) => {
+        const room = await RoomModel
+            .findById(id)
+            .orFail()
+            .lean()
+            .populate("partIds", "firstname lastname userImg")
+        return room;
+    }
+
 
     getRoomsByCreatorId = async(id: string): Promise<RoomDto[]> => {
         const rooms = await RoomModel.find(

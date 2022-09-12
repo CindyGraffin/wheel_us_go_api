@@ -24,7 +24,8 @@ const RoomSchema = new Schema<RoomDto>({
         required: true
     },
     partIds: [{
-        type: Schema.Types.ObjectId,
+        type: mongoose.Types.ObjectId,
+        ref:'User',
         required: true
     }],
     aperoWheel: {
@@ -37,7 +38,7 @@ const RoomSchema = new Schema<RoomDto>({
             required: true
         }, 
         person: {
-            type: Schema.Types.ObjectId
+            type: mongoose.Types.ObjectId
         }
     },
     dresscode: {
