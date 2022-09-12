@@ -1,6 +1,6 @@
 import express from 'express';
 import {  RoomController } from '../controllers/rooms';
-import { verifyToken } from '../utils';
+
 
 const roomsRouter = express.Router()
 

@@ -5,7 +5,6 @@ import { UserModel } from "../models/User";
 import { CreateRoomDto, RoomDto } from "../dtos/room.dto";
 
 
-
 export class RoomService {
 
     createRoom = async (room: CreateRoomDto): Promise<CreateRoomDto> => {
