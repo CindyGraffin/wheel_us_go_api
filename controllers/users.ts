@@ -2,26 +2,44 @@ import { NextFunction, Request, Response } from "express";
 import { userService } from "../service/userService";
 
 export class UserController {
-    
-    private service = userService
+    private service = userService;
 
-    getUserById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    getUserById = async (
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ): Promise<void> => {
         try {
-            const user = await this.service.getUserById(req.params.id)            
-            res.status(200).json(user)
+            const user = await this.service.getUserById(req.params.id);
+            res.status(200).json(user);
         } catch (error) {
-            next(error)
+            next(error);
         }
-    }
+    };
 
-    getAllUsers = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    getAllUsers = async (
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ): Promise<void> => {
         try {
-            const users = await this.service.getAllUsers()
-            res.status(200).json(users)
+            const users = await this.service.getAllUsers();
+            res.status(200).json(users);
         } catch (error) {
-            next(error)
+            next(error);
         }
-    }
+    };
+
+    blockUserById = async (
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ): Promise<void> => {
+        try {
+            const user = await this.service.blockUser(req.params.id, next);
+            res.status(200).json(user);
+        } catch (error) {
+            next(error);
+        }
+    };
 }
-
-

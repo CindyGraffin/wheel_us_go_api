@@ -11,5 +11,6 @@ const friendController = new FriendsController();
 usersRouter.get("/", userController.getAllUsers);
 usersRouter.get("/:id", userController.getUserById);
 usersRouter.get("/friends/:id", friendController.getFriendsByUserId);
+usersRouter.post("/ban/:id", userController.blockUserById)
 
 export { usersRouter };

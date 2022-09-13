@@ -9,6 +9,7 @@ export interface UserDto extends Dto {
     birthday: Date;
     role: string;
     password: string | undefined;
+    isActive: boolean;
     city: string;
     userImg?: string;
     outingPart: number;
@@ -18,9 +19,18 @@ export interface UserDto extends Dto {
     groupsId?: mongoose.Schema.Types.ObjectId[];
 }
 
-export interface RegisterUserDto extends Omit<UserDto, "friends" | "group" | "userImg" | "birthday" | "outingPart" | "outingCre">{
-}
+export interface BlockUserDto extends Pick<UserDto, "_id" | "isActive"> {}
 
-export interface GetFriendsDto extends Pick<UserDto, "_id" | "firstname"| "lastname" | "userImg">{
+export interface RegisterUserDto
+    extends Omit<
+        UserDto,
+        | "friends"
+        | "group"
+        | "userImg"
+        | "birthday"
+        | "outingPart"
+        | "outingCre"
+    > {}
 
-}
+export interface GetFriendsDto
+    extends Pick<UserDto, "_id" | "firstname" | "lastname" | "userImg"> {}

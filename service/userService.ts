@@ -1,10 +1,12 @@
+import { BlockUserDto } from "./../dtos/users.dto";
 import { UserModel } from "../models/User";
 import bcrypt from "bcryptjs";
 import { createError } from "../utils";
 import { Credentials } from "../types/Credentials";
-import mongoose from "mongoose";
+import mongoose, { UpdateWriteOpResult } from "mongoose";
 import { GetFriendsDto, RegisterUserDto, UserDto } from "../dtos/users.dto";
 import { RoomDto } from "../dtos/room.dto";
+import { NextFunction } from "express";
 
 export class UserService {
     register = async (user: RegisterUserDto): Promise<RegisterUserDto> => {
@@ -22,6 +24,7 @@ export class UserService {
             city: user.city,
             outingPart: 0,
             outingCre: 0,
+            isActive: true,
         });
         return await newUser.save();
     };
@@ -34,6 +37,9 @@ export class UserService {
             .populate("roomsId");
         if (!user) {
             throw createError(400, "Wrong password or username");
+        }
+        if (user.isActive === false) {
+            throw createError(400, "Suspended Account");
         }
         const goodPassword = await bcrypt.compareSync(
             credentials.password,
@@ -77,12 +83,30 @@ export class UserService {
         return users;
     };
 
-    deleteRoomInUser = async(userId: string, roomId: string): Promise<void> => {
-        const user = await UserModel.findByIdAndUpdate(
-            userId,
-            {$pull: {roomsId: roomId}}
-        ).orFail();
-    }
+    deleteRoomInUser = async (
+        userId: string,
+        roomId: string
+    ): Promise<void> => {
+        const user = await UserModel.findByIdAndUpdate(userId, {
+            $pull: { roomsId: roomId },
+        }).orFail();
+    };
+
+    blockUser = async (
+        id: string,
+        next: NextFunction
+    ): Promise<UpdateWriteOpResult | void> => {
+        const user = await this.getUserById(id);
+
+        if (user) {
+            const data = {
+                isActive: !user.isActive,
+            };
+            return await UserModel.updateOne({ _id: user._id }, data);
+        } else {
+            return next(createError(400, "Une Erreur est survenue !"));
+        }
+    };
 }
 
 export const userService = Object.freeze(new UserService());
