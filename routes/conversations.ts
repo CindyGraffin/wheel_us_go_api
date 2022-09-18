@@ -8,5 +8,6 @@ const conversationController = new ConversationController()
 
 conversationRouter.post('/newconversation', conversationController.createConversation)
 conversationRouter.get('/:userId', conversationController.getConversationsByUserId)
+conversationRouter.delete('/:conversationId', conversationController.deleteConversationById)
 
 export {conversationRouter};
