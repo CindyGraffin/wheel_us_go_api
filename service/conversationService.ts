@@ -1,5 +1,6 @@
 import { ConversationDto } from "../dtos/conversation.dto";
 import { ConversationModel } from "../models/ConversationModel";
+import { messageService } from "./messageService";
 
 export class ConversationService {
     
@@ -18,6 +19,12 @@ export class ConversationService {
             }
         })
         return conversation;
+    }
+
+    deleteConversationById = async(conversationId: string): Promise<void> => {
+        await ConversationModel.deleteOne({
+            _id: conversationId
+        })
     }
 } 
 
