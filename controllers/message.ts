@@ -22,4 +22,13 @@ export class MessageController {
             next(error)
         }
     }
+
+    deleteMessagesByConversationId = async(req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            await this.service.deleteMessagesByConversationId(req.params.conversationId)
+            res.status(200).json({message: 'messages deleted'})
+        } catch (error) {
+            next(error)
+        }
+    }
 }

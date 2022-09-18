@@ -15,6 +15,12 @@ export class MessageService {
         })
         return messages;
     }
+
+    deleteMessagesByConversationId = async(conversationId: string): Promise<void> => {
+        await MessageModel.deleteMany({
+            conversationId: conversationId
+        })
+    } 
 } 
 
 export const messageService = Object.freeze(new MessageService());
