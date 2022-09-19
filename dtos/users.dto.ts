@@ -17,6 +17,7 @@ export interface UserDto extends Dto {
     roomsId?: mongoose.Schema.Types.ObjectId[];
     friendsId?: mongoose.Schema.Types.ObjectId[];
     groupsId?: mongoose.Schema.Types.ObjectId[];
+    reportingsId: mongoose.Schema.Types.ObjectId[];
 }
 
 export interface BlockUserDto extends Pick<UserDto, "_id" | "isActive"> {}

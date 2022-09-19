@@ -68,6 +68,12 @@ const UserSchema = new Schema<UserDto>(
             default: true,
             required: true,
         },
+        reportingsId: [
+            {
+                type: mongoose.Types.ObjectId,
+                ref: "Reporting",
+            },
+        ],
     },
     { timestamps: true }
 );
