@@ -1,5 +1,5 @@
 import { ReportingDto } from "./../dtos/reporting.dto";
-import mongoose from "mongoose";
+import mongoose, { Mongoose, Types } from "mongoose";
 
 const { Schema } = mongoose;
 
@@ -9,10 +9,24 @@ const ReportingSchema = new Schema<ReportingDto>(
             type: String,
             required: true,
         },
-        userId: {
-            type: mongoose.Types.ObjectId,
-            ref: "User",
-            required: true,
+        reportBy: {
+            userId: {
+                type: mongoose.Types.ObjectId,
+                ref: "User",
+                require: true,
+            },
+            firstname: {
+                type: String,
+                require: true,
+            },
+            lastname: {
+                type: String,
+                require: true,
+            },
+            email: {
+                type: String,
+                require: true,
+            },
         },
         comment: {
             type: String,

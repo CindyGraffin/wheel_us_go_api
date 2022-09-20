@@ -1,4 +1,3 @@
-import { BlockUserDto } from "./../dtos/users.dto";
 import { UserModel } from "../models/User";
 import bcrypt from "bcryptjs";
 import { createError } from "../utils";

@@ -35,3 +35,6 @@ export interface RegisterUserDto
 
 export interface GetFriendsDto
     extends Pick<UserDto, "_id" | "firstname" | "lastname" | "userImg"> {}
+
+export interface PartialUserDto
+    extends Pick<UserDto, "_id" | "firstname" | "lastname" | "email"> {}
