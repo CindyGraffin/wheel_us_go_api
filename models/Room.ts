@@ -19,6 +19,10 @@ const RoomSchema = new Schema<RoomDto>({
         type: Date,
         required: true
     },
+    time: {
+        type: String,
+        required: true
+    },
     theme: {
         type: String,
         required: true
@@ -28,7 +32,7 @@ const RoomSchema = new Schema<RoomDto>({
         ref:'User',
         required: true
     }],
-    aperoWheel: {
+    aperoWheel: { 
         setUp: {
             type: Boolean,
             required: true

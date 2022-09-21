@@ -19,24 +19,20 @@ export interface RoomDto extends Dto {
     placeName: string;
     address: string;
     date: Date;
+    time: string;
     partIds: [mongoose.Schema.Types.ObjectId];
     theme: string;
     aperoWheel: WheelAperoType;
     dresscode: Dresscode;
 }
 
-type Part = {
-    _id: mongoose.Schema.Types.ObjectId;
-    firstname: string;
-    lastname: string;
-    userImg: string
-}
 export interface RoomWithPartsDto extends Dto {
     _id: mongoose.Schema.Types.ObjectId;
     creatorId: mongoose.Schema.Types.ObjectId;
     placeName: string;
     address: string;
     date: Date;
+    time: string;
     theme: string;
     aperoWheel: WheelAperoType;
     dresscode: Dresscode;
@@ -49,6 +45,7 @@ export interface CreateRoomDto extends Dto {
     placeName: string;
     address: string;
     date: Date;
+    time: string
     theme: string;
     partIds: [mongoose.Schema.Types.ObjectId];
     aperoWheelSetUp: boolean;

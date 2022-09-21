@@ -16,9 +16,9 @@ export class RoomService {
         });
         partIds.push(room.creatorId)
         const newRoom = new RoomModel({
-            _id: new mongoose.Types.ObjectId(),
             creatorId: room.creatorId,
-            date: new Date(),
+            date: room.date,
+            time: room.time,
             placeName: room.placeName,
             address: room.address,
             theme: room.theme,
