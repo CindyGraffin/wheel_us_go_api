@@ -1,8 +1,9 @@
-import mongoose from "mongoose";
+import mongoose, { LeanDocument } from "mongoose";
 import { RoomModel } from "../models/Room";
 import { userService } from "./userService";
 import { UserModel } from "../models/User";
-import { CreateRoomDto, RoomDto } from "../dtos/room.dto";
+import { CreateRoomDto, RoomDto, RoomWithPartsDto } from "../dtos/room.dto";
+import { ObjectId } from "mongodb";
 
 
 export class RoomService {
@@ -40,12 +41,12 @@ export class RoomService {
         return newRoom;
     };
 
-    getRoomById = async(id: string) => {
-        const room = await RoomModel.findById(id)
+    getRoomById = async(id: string): Promise<RoomDto> => {
+        const room = await RoomModel.findById(id).orFail()
         return room
     }
 
-    getRoomByIdWithParts = async(id: string) => {
+    getRoomByIdWithParts = async(id: string): Promise<LeanDocument<RoomDto>> => {
         const room = await RoomModel
             .findById(id)
             .orFail()
@@ -68,14 +69,13 @@ export class RoomService {
         return userRooms;
     }
 
-    deleteUserInRoom = async(roomId: string, userId: string) => {
+    deleteUserInRoom = async(roomId: string, userId: string): Promise<void> => {
         await userService.deleteRoomInUser(userId, roomId)
         const room = await RoomModel.findByIdAndUpdate(
             roomId,
             {$pull: {partIds: userId}},
             {new: true}
         ).orFail();
-        return room;
     }
 } 
 
