@@ -36,6 +36,10 @@ export class ReportingService {
         const userRepport = response.reportingsId;
         return userRepport;
     };
+
+    getReportById = async (id: string): Promise<any> => {
+        return await ReportingModel.findById(id).orFail();
+    };
 }
 
 export const reportingService = Object.freeze(new ReportingService());

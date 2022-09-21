@@ -16,6 +16,7 @@ usersRouter.get("/friends/:id", friendController.getFriendsByUserId);
 usersRouter.post("/ban/:id", userController.blockUserById);
 
 usersRouter.post("/report/:id", reportingController.createReport);
-usersRouter.get("/report/:id", reportingController.getRoomsByUserId);
+usersRouter.get("/report/:id", reportingController.getReportsByUserId);
+
 
 export { usersRouter };
