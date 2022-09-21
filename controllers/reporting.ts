@@ -19,4 +19,19 @@ export class ReportingController {
             next(createError(400, "Une Erreur innatendue est survenue !"));
         }
     };
+
+    getRoomsByUserId = async (
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ): Promise<void> => {
+        try {
+            const report = await this.reportingService.getReportByUserId(
+                req.params.id
+            );
+            res.status(200).json(report);
+        } catch (error) {
+            next(error);
+        }
+    };
 }
