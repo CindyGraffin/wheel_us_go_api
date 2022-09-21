@@ -1,6 +1,7 @@
 import { ReportingDto } from "./../dtos/reporting.dto";
 import { UserModel } from "../models/User";
 import { ReportingModel } from "../models/Reporting";
+import mongoose from "mongoose";
 
 export class ReportingService {
     createReport = async (
@@ -22,6 +23,22 @@ export class ReportingService {
         await UserModel.findByIdAndUpdate(userReportId, {
             $push: { reportingsId: newReport._id },
         }).orFail();
+    };
+
+    getReportByUserId = async (
+        id: string
+    ): Promise<mongoose.Schema.Types.ObjectId[]> => {
+        const response = await UserModel.findById(id)
+            .orFail()
+            .populate("reportingsId")
+            .select("reportingsId");
+
+        const userRepport = response.reportingsId;
+        return userRepport;
+    };
+
+    getReportById = async (id: string): Promise<any> => {
+        return await ReportingModel.findById(id).orFail();
     };
 }
 
