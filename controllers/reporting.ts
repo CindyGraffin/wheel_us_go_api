@@ -20,6 +20,19 @@ export class ReportingController {
         }
     };
 
+    getAllReports = async (
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ): Promise<void> => {
+        try {
+            const reports = await this.reportingService.getAllReports();
+            res.status(200).json(reports);
+        } catch (err) {
+            next(createError(400, "Une Erreur innatendue est survenue !"));
+        }
+    };
+
     getReportsByUserId = async (
         req: Request,
         res: Response,
