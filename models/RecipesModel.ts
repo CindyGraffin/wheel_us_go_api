@@ -3,13 +3,14 @@ import { RecipesDto } from "../dtos/recipes.dto";
 
 const RecipesSchema = new mongoose.Schema<RecipesDto>(
   {
-    _id: { type: Schema.Types.ObjectId, required: true },
-    title: { type: String },
-    times: { type: Number },
-    difficulty: { type: String },
-    ingredients: { type: [String] },
-    instruction: { type: [String] },
-    datePublication: { type: Date },
+    title: { type: String, required: true },
+    times: { type: Number, required: true },
+    difficulty: { type: String, required: true },
+    ingredients: {
+      quantity: { type: Number },
+      denomination: { type: String, required: true },
+    },
+    instruction: { type: [String], required: true },
   },
   { timestamps: true }
 );

@@ -19,7 +19,7 @@ export class RecipeService {
   };
 
   deleteRecipeById = async (recipeId: string): Promise<void> => {
-    await RecipesModel.deleteMany({
+    await RecipesModel.deleteOne({
       recipeId: recipeId,
     });
   };

@@ -12,7 +12,7 @@ export interface RecipesDto extends Dto{
     title: string;
     times: number;
     difficulty: string
-    ingredients: Ingredients
+    ingredients: Ingredients[]
     instruction: string[]
     datePublication: Date
 }
