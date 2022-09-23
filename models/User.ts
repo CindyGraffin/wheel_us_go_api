@@ -13,6 +13,9 @@ const UserSchema = new Schema<UserDto>(
             type: String,
             required: true,
         },
+        fullname: {
+            type: String,
+        },
         email: {
             type: String,
             required: true,
@@ -77,7 +80,6 @@ const UserSchema = new Schema<UserDto>(
     },
     { timestamps: true }
 );
-
 
 const UserModel = mongoose.model<UserDto>("User", UserSchema);
 

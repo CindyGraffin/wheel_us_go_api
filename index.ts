@@ -9,6 +9,8 @@ import { conversationRouter } from "./routes/conversations";
 import { messageRouter } from "./routes/messages";
 import { statsRouter } from "./routes/stats";
 import { reportRouter } from "./routes/report";
+import { searchRouter } from './routes/search';
+
 
 const app = express();
 
@@ -33,6 +35,7 @@ app.use(cors());
 app.use(cookieParser());
 app.use(express.json());
 
+
 app.use("/api/users", usersRouter);
 app.use("/api/rooms", roomsRouter);
 app.use("/api/auth", authRouter);
@@ -40,6 +43,8 @@ app.use("/api/conversations", conversationRouter);
 app.use("/api/messages", messageRouter);
 app.use("/api/stats", statsRouter);
 app.use("/api/report", reportRouter);
+app.use('/api/search', searchRouter)
+
 
 // allow to send a customized object error when an error occurs
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
