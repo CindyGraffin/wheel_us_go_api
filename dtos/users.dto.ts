@@ -5,6 +5,7 @@ export interface UserDto extends Dto {
     _id: mongoose.Schema.Types.ObjectId;
     firstname: string;
     lastname: string;
+    fullname: string;
     email: string;
     birthday: Date;
     role: string;
