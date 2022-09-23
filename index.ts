@@ -8,6 +8,7 @@ import { roomsRouter } from './routes/rooms';
 import { conversationRouter } from './routes/conversations';
 import { messageRouter } from './routes/messages';
 import { statsRouter } from "./routes/stats";
+import { recipeRouter } from "./routes/recipes";
 
 const app = express();
 
@@ -38,6 +39,7 @@ app.use('/api/auth', authRouter)
 app.use('/api/conversations', conversationRouter)
 app.use('/api/messages', messageRouter)
 app.use("/api/stats", statsRouter);
+app.use("/api/recipes", recipeRouter);
 
 // allow to send a customized object error when an error occurs
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {

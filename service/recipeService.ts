@@ -8,15 +8,13 @@ export class RecipeService {
     return newRecipe;
   };
 
-  getAllRecipes = async (recipeId: string): Promise<RecipesDto[]> => {
-    const recipes = RecipesModel.find({
-      conversationId: recipeId,
-    });
+  getAllRecipes = async (): Promise<RecipesDto[]> => {
+    const recipes = RecipesModel.find();
     return recipes;
   };
 
   getRecipe = async (id: string): Promise<RecipesDto> => {
-    const recipe = await RecipesModel.findById(id).orFail();
+    const recipe = await RecipesModel.findById(id).orFail();   
     return recipe;
   };
 
@@ -26,3 +24,4 @@ export class RecipeService {
     });
   };
 }
+export const recipeService = Object.freeze(new RecipeService());
