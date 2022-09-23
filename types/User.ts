@@ -1,9 +1,9 @@
 import mongoose, { Schema, Types } from "mongoose";
 
 type User = {
-    firstName: string;
-    lastName: string;
-    fullName: string;
+    firstname: string;
+    lastname: string;
+    fullname: string;
     email: string;
     birthday: Date;
     role: string;

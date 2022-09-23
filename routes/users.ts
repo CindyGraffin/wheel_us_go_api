@@ -5,7 +5,7 @@ import { verifyToken } from '../utils';
 const usersRouter = express.Router()
 
 // GET ALL USERS
-usersRouter.get('/', verifyToken, getAllUsers)
+usersRouter.get('/', getAllUsers)
 
 // GET ONE USER
 usersRouter.get('/:id', getUserById)

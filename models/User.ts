@@ -4,15 +4,15 @@ import { User } from "../types/User";
 const {Schema} = mongoose;
 
 const UserSchema = new Schema<User>({
-    firstName: {
+    firstname: {
         type: String,
         required: true
     },
-    lastName: {
+    lastname: {
         type: String,
         required: true
     },
-    fullName: {
+    fullname: {
         type: String,
         
     },
