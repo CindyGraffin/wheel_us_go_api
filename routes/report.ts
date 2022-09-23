@@ -5,6 +5,7 @@ const reportRouter = express.Router();
 
 const reportController = new ReportingController();
 
+reportRouter.get("/", reportController.getAllReports);
 reportRouter.get("/:id", reportController.getReportById);
 
 export { reportRouter };
