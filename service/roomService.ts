@@ -8,7 +8,7 @@ import { ObjectId } from "mongodb";
 
 export class RoomService {
 
-    createRoom = async (room: CreateRoomDto): Promise<CreateRoomDto> => {
+    createRoom = async (room: CreateRoomDto): Promise<RoomDto> => {
         const requestIds: mongoose.Schema.Types.ObjectId[] = room.partIds;
         const partIds: mongoose.Schema.Types.ObjectId[] = [];
         requestIds.forEach((id) => {
@@ -24,13 +24,13 @@ export class RoomService {
             theme: room.theme,
             partIds: partIds,
             aperoWheel: {
-                setUp: room.aperoWheel.setUp,
+                setUp: room.aperoWheelSetUp,
                 launched: false,
                 person: undefined,
             },
             dresscode: {
-                setUp: room.dresscode.setUp,
-                description: room.dresscode.description,
+                setUp: room.dresscodeSetUp,
+                description: room.dresscodeDescription,
             },
         });
         await newRoom.save(() => {

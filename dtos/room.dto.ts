@@ -43,6 +43,15 @@ export interface RoomWithPartsDto extends Dto {
     partIds: LeanDocument<ObjectId>[]
 }
 
-export interface CreateRoomDto extends Omit<RoomDto, "aperoWheel.launched" | "aperoWheel.person">{
-
+export interface CreateRoomDto extends Dto {
+    _id: mongoose.Schema.Types.ObjectId;
+    creatorId: mongoose.Schema.Types.ObjectId;
+    placeName: string;
+    address: string;
+    date: Date;
+    theme: string;
+    partIds: [mongoose.Schema.Types.ObjectId];
+    aperoWheelSetUp: boolean;
+    dresscodeSetUp: boolean;
+    dresscodeDescription: string;
 }

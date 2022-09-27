@@ -14,6 +14,7 @@ export class UserService {
         const newUser = new UserModel({
             firstname: user.firstname,
             lastname: user.lastname,
+            fullName: user.firstname + ' ' + user.lastname,
             email: user.email,
             role: "user",
             userImg:

@@ -16,6 +16,11 @@ export class ReportingService {
         return newReport;
     };
 
+    getAllReports = async (): Promise<ReportingDto[]> => {
+        const reports = await ReportingModel.find().orFail();
+        return reports;
+    };
+
     reportUserById = async (
         userReportId: string,
         newReport: ReportingDto
@@ -35,6 +40,10 @@ export class ReportingService {
 
         const userRepport = response.reportingsId;
         return userRepport;
+    };
+
+    getReportById = async (id: string): Promise<any> => {
+        return await ReportingModel.findById(id).orFail();
     };
 }
 

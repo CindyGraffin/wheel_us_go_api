@@ -13,6 +13,9 @@ const UserSchema = new Schema<UserDto>(
             type: String,
             required: true,
         },
+        fullname: {
+            type: String,
+        },
         email: {
             type: String,
             required: true,
