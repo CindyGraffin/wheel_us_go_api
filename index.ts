@@ -8,9 +8,9 @@ import { roomsRouter } from "./routes/rooms";
 import { conversationRouter } from "./routes/conversations";
 import { messageRouter } from "./routes/messages";
 import { statsRouter } from "./routes/stats";
+import { recipeRouter } from "./routes/recipes";
 import { reportRouter } from "./routes/report";
 import { searchRouter } from './routes/search';
-
 
 const app = express();
 
@@ -42,6 +42,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/conversations", conversationRouter);
 app.use("/api/messages", messageRouter);
 app.use("/api/stats", statsRouter);
+app.use("/api/recipes", recipeRouter);
 app.use("/api/report", reportRouter);
 app.use('/api/search', searchRouter)
 
