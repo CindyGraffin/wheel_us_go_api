@@ -5,7 +5,7 @@ const { Schema } = mongoose;
 
 const ReportingSchema = new Schema<ReportingDto>(
     {
-        category: {
+        category: { 
             type: String,
             required: true,
         },
