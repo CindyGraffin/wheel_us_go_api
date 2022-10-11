@@ -19,5 +19,4 @@ usersRouter.post("/report/:id", reportingController.createReport);
 usersRouter.get("/report/:id", reportingController.getReportsByUserId);
 
 
-export {usersRouter};
-
+export { usersRouter };
